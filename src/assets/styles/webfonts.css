@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "charcoal";
+  src: url("../font/charcoal-webfont.woff2") format("woff2"),
+    url("../font/charcoal-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Chicago;
+  src: url(../font/chicagoreg.woff2) format("woff2"),
+    url(../font/chicagoreg.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
