@@ -31,6 +31,5 @@ ul
 li
     display: inline-block
     font-size: 16px;
-    font-weight: 600
     padding: 5px;
 </style>

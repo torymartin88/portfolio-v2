@@ -19,6 +19,7 @@ body
   -moz-osx-font-smoothing: none
   image-rendering: pixelated
   font-family: Chicago, Arial, sans-serif
+  font-weight: 400
   font-size: 16px
   padding: 0;
   margin: 0;

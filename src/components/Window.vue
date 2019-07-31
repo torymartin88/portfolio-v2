@@ -50,7 +50,6 @@ export default {
   text-align: center;
   height: 24px;
   font-size: 16px;
-  font-weight: 600;
   line-height: 24px;
   cursor: move;
   user-select: none;
