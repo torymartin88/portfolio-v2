@@ -13,7 +13,7 @@
           <button class="calculator-btn gray action" @click="clear()">C</button>
         </div>
         <div class="calculator-col">
-          <button class="calculator-btn gray action" @click="del()">del</button>
+          <button class="calculator-btn gray action" @click="backspace()">del</button>
         </div>
         <div class="calculator-col">
           <button class="calculator-btn gray action" @click="append('%')">%</button>
@@ -86,7 +86,7 @@ String.prototype.replaceAll = function(search, replacement) {
 };
 
 export default {
-  name: "Calculator",
+  name: "Weather",
   data() {
     return {
       calculation: "",
@@ -151,7 +151,7 @@ export default {
 };
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 $darker = #2f2f31;
 $dark = #424345;
 $gray = #616163;

@@ -2,7 +2,9 @@
   <div class="desktop">
     {{windows.length}}
     <h1>My Desktop</h1>
-    <button v-on:click="openCalculator">Open Calculator</button>
+    <button v-on:click="openApp('Calculator')">Open Calculator</button>
+    <button v-on:click="openApp('Weather')">Open Weather</button>
+    <button v-on:click="openApp('Notepad')">Open Notepad</button>
   </div>
 </template>
 
@@ -10,8 +12,8 @@
 export default {
   name: "Desktop",
   methods: {
-    openCalculator() {
-      this.$store.dispatch("openWindow", "Calculator2");
+    openApp(appName) {
+      this.$store.dispatch("openWindow", appName);
     }
   },
   computed: {
@@ -25,7 +27,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
 .desktop {
-  background: #63639C;
+  background: #63639C url('../assets/img/bg.jpg');
   position: absolute;
   top: 24px;
   left: 0;

@@ -1,17 +1,25 @@
 export default {
     Calculator: {
         w: 200,
-        h: 300,
+        h: 325,
         maxw: 200,
-        maxh: 300,
-        minw: 150,
-        minh: 250
+        maxh: 325,
+        minw: 200,
+        minh: 325
     },
-    Calculator2: {
+    Weather: {
         w: 200,
         h: 325,
         maxw: 200,
         maxh: 325,
+        minw: 200,
+        minh: 325
+    },
+    Notepad: {
+        w: 200,
+        h: 325,
+        maxw: 800,
+        maxh: 900,
         minw: 200,
         minh: 325
     }

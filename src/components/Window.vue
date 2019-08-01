@@ -1,47 +1,58 @@
 <template>
-    <div class="window" v-bind:class="{ active: active }">
-        <div class="window-header">
-            <div class="close no-drag" @click="closeWindow"></div>
-            <div class="spacer"><i></i><i></i><i></i><i></i><i></i></div>
-            <div>Calculator</div>
-            <div class="spacer"><i></i><i></i><i></i><i></i><i></i></div>
-            <!-- <div class="close no-drag"></div> -->
-        </div>
-        <div class="window-content">
-            <component :is="activeComponent"></component>
-        </div>
+  <div class="window" v-bind:class="{ active: active }" @click="windowActive">
+    <div class="window-header">
+      <div class="close no-drag" @click="closeWindow"></div>
+      <div class="spacer">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div>{{activeComponent}}</div>
+      <div class="spacer">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <!-- <div class="close no-drag"></div> -->
     </div>
+    <div class="window-content">
+      <component :is="activeComponent"></component>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'window',
-  props: ['component', 'active'],
+  name: "window",
+  props: ["component", "active"],
   data: function() {
     return {
       activeComponent: this.component
-    }
+    };
   },
   methods: {
-      closeWindow() {
-          this.$emit('closeWindow')
+    closeWindow() {
+      this.$emit("closeWindow");
+    },
+    windowActive() {
+      // if this window isn't currently active, emit activated event for WindowManager
+      if (!this.active) {
+        this.$emit("activated");
       }
+    }
   }
-}
+};
 </script>
 
 
 <style lang="stylus" scoped>
 .window {
-    background: #DEDEDE
-    border: 1px solid #303030
-    box-shadow: 3px 3px 0 0 rgba(0,0,0,0.20), inset 1px 1px 0 1px rgba(255,255,255,0.50), inset -1px -1px 0 1px rgba(0,0,0,0.50)
-    height: 100%;
-    opacity: 0.9
+  background: #DEDEDE;
+  border: 1px solid #303030;
+  box-shadow: inset 1px 1px 0 1px rgba(255, 255, 255, 0.5), inset -1px -1px 0 1px rgba(0, 0, 0, 0.5);
+  height: 100%;
+  opacity: 0.9;
 
-    &.active {
-        opacity: 1
-    }
+  &.active {
+    opacity: 1;
+    box-shadow: 2px 3px 0 0 rgba(0, 0, 0, 0.8), inset 1px 1px 0 1px rgba(255, 255, 255, 0.5), inset -1px -1px 0 1px rgba(0, 0, 0, 0.5);
+  }
 }
 
 .window-header {
@@ -53,22 +64,22 @@ export default {
   line-height: 24px;
   cursor: move;
   user-select: none;
-    padding: 3px;
+  padding: 3px;
 
   .close {
     background-image: linear-gradient(135deg, #9D9E9D 0%, #F3F2F3 100%);
     border: 1px solid #525252;
-    box-shadow: 1px 1px 0 0 #FFFFFF, -1px -1px 0 0 #9E9E9E, inset 1px 1px 0 1px rgba(255,255,255,0.50), inset -1px -1px 0 1px rgba(0,0,0,0.50);
+    box-shadow: 0.5px 0.5px 1px 0 #FFFFFF, -0.5px -0.5px 1px 0 #9E9E9E, inset 0.5px 0.5px 1px 1px rgba(255, 255, 255, 0.5), inset -0.5px -0.5px 1px 1px rgba(0, 0, 0, 0.5);
     width: 16px;
     height: 16px;
-    cursor pointer
+    cursor: pointer;
 
     &:hover {
-        background-image: linear-gradient(135deg, darken(#9D9E9D, 5%) 0%, darken(#F3F2F3, 5%) 100%);
+      background-image: linear-gradient(135deg, darken(#9D9E9D, 5%) 0%, darken(#F3F2F3, 5%) 100%);
     }
 
     &:active {
-        background-image: linear-gradient(135deg, darken(#9D9E9D, 15%) 0%, darken(#F3F2F3, 15%) 100%);
+      background-image: linear-gradient(135deg, darken(#9D9E9D, 15%) 0%, darken(#F3F2F3, 15%) 100%);
     }
   }
 
@@ -79,15 +90,28 @@ export default {
     i {
       width: 100%;
       height: 1px;
-      background: #000000;
+      background: #ffffff;
       display: block;
-      margin-bottom: 2px;
-    }  
+      margin-bottom: 1px;
+      box-shadow: 1px 1px rgba(0,0,0,.4);
+    }
+  }
+
+  .window:not(.active) & {
+    .spacer {
+      opacity: 0;
+    }
+
+    .close {
+      opacity: 0;
+      pointer-events: none;
+      cursor: default;
+    }
   }
 }
 
 .window-content {
-  background: white
+  background: white;
   // padding: 10px;
   margin-left: 2px;
   margin-right: 2px;

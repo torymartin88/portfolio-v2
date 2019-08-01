@@ -13,7 +13,8 @@ Vue.component('vue-draggable-resizable', VueDraggableResizable)
 
 // dynamic app imports
 Vue.component('Calculator', () => import('@/apps/Calculator.vue'))
-Vue.component('Calculator2', () => import('@/apps/Cal2.vue'))
+Vue.component('Weather', () => import('@/apps/Weather.vue'))
+Vue.component('Notepad', () => import('@/apps/Notepad.vue'))
 
 new Vue({
   router,

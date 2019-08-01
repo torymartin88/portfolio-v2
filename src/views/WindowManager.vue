@@ -4,8 +4,8 @@
       <vue-draggable-resizable v-for="w in windows" :key="w.id"
         :x="w.x" :y="w.y" :w="w.w" :h="w.h" :max-width="w.maxw" :max-height="w.maxh" :min-width="w.minw" :min-height="w.minh"
         :z="w.active ? 3 : 2" :parent="true" :handles="['br']" :drag-handle="'.window-header'" :drag-cancel="'.no-drag'" class-name="window"
-        @activated="onActivated(w.id)">
-        <Window :component="w.component" :active="w.active" @closeWindow="onCloseWindow(w.id)" />
+        @activated="onActivated(w.id)" :active="w.active">
+        <Window :component="w.component" :active="w.active" @closeWindow="onCloseWindow(w.id)" @activated="onActivated(w.id)" />
       </vue-draggable-resizable>
     </div>
   </div>
