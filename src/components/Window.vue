@@ -20,7 +20,15 @@
 <script>
 export default {
   name: "window",
-  props: ["component", "active"],
+  props: {
+    component: {
+      type: String,
+      required: true
+    },
+    active: {
+      type: Boolean
+    }
+  },
   data: function() {
     return {
       activeComponent: this.component

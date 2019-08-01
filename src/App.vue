@@ -33,7 +33,7 @@
   }
 
   body {
-    background: #EDEDED
+    background: #000
     font-smooth: never
     font-synthesis: style;
     -webkit-font-smoothing: none
@@ -45,6 +45,11 @@
     padding: 0;
     margin: 0;
     overflow hidden
+  }
+
+  #app {
+    border-radius: 10px;
+    overflow: hidden;
   }
 
   button, input[type='text'], input[type='password'], input[type='number'], select {

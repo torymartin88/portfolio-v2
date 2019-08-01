@@ -1,26 +1,46 @@
 <template>
   <div class="weather">
-    <div v-if="forecast">
-      {{forecast.currently.temperature}}<br>
-      {{forecast.hourly.summary}}
-      <hr>
-      feels like: {{forecast.currently.apparentTemperature}}
+    <div class>
+      <div v-if="address" class="location">{{address}}</div>
+      <div class="temperature">
+        <h1>{{temperature}}&#176;F</h1>
+        <WeatherIcon :iconName="iconType" iconColor="#777777" />
+      </div>
+      <p>{{summary}}</p>
     </div>
-    <div v-if="address">
-      {{address}}
+    <hr>
+    <div class="extra">
+      <div>
+        <label>Wind</label>
+        <p>{{windSpeed}}</p>
+      </div>
+      <div>
+        <label>Rain</label>
+        <p>{{rainChance}}%</p>
+      </div>
+      <div>
+        <label>Humidity</label>
+        <p>{{humidity}}%</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import WeatherIcon from '@/components/WeatherIcon'
+
 export default {
   name: "Weather",
   data() {
     return {
-      calculation: "",
-      tempResult: "0",
-      location: null,
-      address: null,
+      locationData: null,
+      address: 'Loading...',
+      temperature: '-',
+      summary: null,
+      iconType: null,
+      windSpeed: '-',
+      rainChance: '-',
+      humidity: '-',
       forecast: null
     };
   },
@@ -28,9 +48,17 @@ export default {
     const self = this
 
     navigator.geolocation.getCurrentPosition((position) => {
-      self.location = position
+      self.locationData = position
       self.$http.post(`/api/weather`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
         console.log(response)
+        // grab a few things from the response
+        self.temperature = response.body.currently.temperature
+        self.summary = response.body.currently.summary
+        self.windSpeed = response.body.currently.windSpeed
+        self.rainChance = response.body.currently.precipProbability
+        self.humidity = response.body.currently.humidity
+
+        // cache the rest of the response, just in case
         self.forecast = response.body
       }, response => {
         console.error('could not get data', response)
@@ -38,17 +66,54 @@ export default {
 
       self.$http.post(`/api/address`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
         console.log(response)
-        self.address = response.body.results[0].formatted_address
+        // just grab the locality (city) for now
+        self.address = response.body.results[0].address_components.filter((item) => item.types.includes('locality'))
       }, response => {
         console.error('could not get data', response)
       })
     })
+  },
+  components: {
+    WeatherIcon
   }
 };
 </script>
 
 <style lang="stylus" scoped>
-.weather {
-    padding: 10px;
-}
+  .weather {
+      padding: 10px;
+
+      p {
+        margin: 0;
+      }
+  }
+
+  .temperature {
+    display: flex;
+    align-items: center;
+    
+    h1 {
+      font-size: 55px;
+      font-weight: 100;
+      margin: 0;
+    }
+
+    .weather-icon {
+      margin-right: 10px;
+    }
+  }
+  
+  .extra {
+    display: flex;
+
+    & > div {
+      flex-grow: 1;
+    }
+
+    label {
+      font-size: 12px;
+    }
+  }
+
+
 </style>

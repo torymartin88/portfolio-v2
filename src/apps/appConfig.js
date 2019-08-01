@@ -16,12 +16,12 @@ export default {
         minh: 325
     },
     Weather: {
-        w: 250,
-        h: 325,
-        maxw: 300,
-        maxh: 525,
+        w: 200,
+        h: 181,
+        maxw: 200,
+        maxh: 181,
         minw: 200,
-        minh: 325
+        minh: 181
     },
     Notepad: {
         w: 200,
