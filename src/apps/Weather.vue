@@ -12,6 +12,7 @@ export default {
       calculation: "",
       tempResult: "0",
       location: null,
+      address: null
       forecast: null
     };
   },
@@ -21,8 +22,15 @@ export default {
     navigator.geolocation.getCurrentPosition((position) => {
       self.location = position
       self.$http.post(`/api/weather`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
-        console.log(response)
+        console.log(`forecast: ${response}`)
         self.forecast = response
+      }, response => {
+        console.error('could not get data', response)
+      })
+
+      self.$http.post(`/api/location`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
+        console.log(`address: ${response}`)
+        self.address = response
       }, response => {
         console.error('could not get data', response)
       })
