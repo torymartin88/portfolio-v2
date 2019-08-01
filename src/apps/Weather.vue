@@ -12,7 +12,7 @@ export default {
       calculation: "",
       tempResult: "0",
       location: null,
-      address: null
+      address: null,
       forecast: null
     };
   },
