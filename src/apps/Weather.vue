@@ -53,6 +53,7 @@ export default {
         console.log(response)
         // grab a few things from the response
         self.temperature = Math.round(response.body.currently.temperature)
+        self.iconType = response.body.currently.icon
         self.summary = response.body.currently.summary
         self.windSpeed = response.body.currently.windSpeed
         self.rainChance = response.body.currently.precipProbability
