@@ -35,12 +35,10 @@ export default {
 
 div[contenteditable] {
     width: 100%;
-    height: 100%;
     font-family: arial, sans-serif;
     font-size: 12px;
     padding: 5px;
     line-height: 1.25;
-    overflow-y: auto;
 
     &:focus {
         outline: none;

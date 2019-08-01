@@ -1,20 +1,28 @@
 import Vue from 'vue'
 import VueDraggableResizable from 'vue-draggable-resizable'
+import VueResource from 'vue-resource'
 
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
+// import external css
 import './assets/styles/VueDraggableResizable.css'
 import './assets/styles/webfonts.css'
 
 Vue.config.productionTip = false
+
+Vue.use(VueResource)
+
 Vue.component('vue-draggable-resizable', VueDraggableResizable)
 
-// dynamic app imports
-Vue.component('Calculator', () => import('@/apps/Calculator.vue'))
-Vue.component('Weather', () => import('@/apps/Weather.vue'))
-Vue.component('Notepad', () => import('@/apps/Notepad.vue'))
+import appConfig from '@/apps/appConfig'
+
+// setup global components for everything in the /src/app folder
+for (let key in appConfig) {
+    // Init global component for app (Key == Name of app)
+    Vue.component(key, () => import(`@/apps/${key}.vue`))
+}
 
 new Vue({
   router,

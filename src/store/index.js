@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import { mutations } from './mutations'
 import actions from './actions'
 
+import time from './modules/time'
+
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -23,5 +25,8 @@ export default new Vuex.Store({
     },
     actions,
     mutations,
+    modules: {
+        time,
+    },
     strict: debug
 })

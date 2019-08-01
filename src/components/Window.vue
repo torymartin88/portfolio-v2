@@ -45,13 +45,13 @@ export default {
 .window {
   background: #DEDEDE;
   border: 1px solid #303030;
-  box-shadow: inset 1px 1px 0 1px rgba(255, 255, 255, 0.5), inset -1px -1px 0 1px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0.5px 0.5px 1px 1px rgba(255,255,255,0.5), inset -0.5px -0.5px 1px 1px rgba(0,0,0,0.5)
   height: 100%;
   opacity: 0.9;
 
   &.active {
     opacity: 1;
-    box-shadow: 2px 3px 0 0 rgba(0, 0, 0, 0.8), inset 1px 1px 0 1px rgba(255, 255, 255, 0.5), inset -1px -1px 0 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 2px 3px 0 0 rgba(0,0,0,0.8), inset 0.5px 0.5px 1px 1px rgba(255,255,255,0.5), inset -0.5px -0.5px 1px 1px rgba(0,0,0,0.5)
   }
 }
 
@@ -64,14 +64,14 @@ export default {
   line-height: 24px;
   cursor: move;
   user-select: none;
-  padding: 3px;
+  padding: 4px;
 
   .close {
-    background-image: linear-gradient(135deg, #9D9E9D 0%, #F3F2F3 100%);
+    background-image: linear-gradient(135deg, #9d9e9d 0%, #ffffff 100%);
     border: 1px solid #525252;
     box-shadow: 0.5px 0.5px 1px 0 #FFFFFF, -0.5px -0.5px 1px 0 #9E9E9E, inset 0.5px 0.5px 1px 1px rgba(255, 255, 255, 0.5), inset -0.5px -0.5px 1px 1px rgba(0, 0, 0, 0.5);
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     cursor: pointer;
 
     &:hover {
@@ -111,12 +111,13 @@ export default {
 }
 
 .window-content {
-  background: white;
-  // padding: 10px;
-  margin-left: 2px;
-  margin-right: 2px;
+  background: #ececec;
+  margin-left: 3px;
+  margin-right: 3px;
   border: 1px solid #525252;
-  height: calc(100% - 26px);
+  box-shadow: -0.5px -0.5px 1px #b9b9b9, 0.5px 0.5px 1px rgba(255,255,255,1)
+  height: calc(100% - 27px);
   user-select: none;
+  overflow-y: auto;
 }
 </style>

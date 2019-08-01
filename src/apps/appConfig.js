@@ -1,4 +1,12 @@
 export default {
+    Sample: {
+        w: 250,
+        h: 325,
+        maxw: 300,
+        maxh: 525,
+        minw: 200,
+        minh: 325
+    },
     Calculator: {
         w: 200,
         h: 325,
@@ -8,10 +16,10 @@ export default {
         minh: 325
     },
     Weather: {
-        w: 200,
+        w: 250,
         h: 325,
-        maxw: 200,
-        maxh: 325,
+        maxw: 300,
+        maxh: 525,
         minw: 200,
         minh: 325
     },

@@ -2,9 +2,16 @@
   <div class="desktop">
     {{windows.length}}
     <h1>My Desktop</h1>
+    <button v-on:click="openApp('Sample')">Open Sample</button>
     <button v-on:click="openApp('Calculator')">Open Calculator</button>
     <button v-on:click="openApp('Weather')">Open Weather</button>
     <button v-on:click="openApp('Notepad')">Open Notepad</button>
+
+    <select>
+      <option>First Option</option>
+      <option>Second Option</option>
+      <option>Third Option</option>
+    </select>
   </div>
 </template>
 
