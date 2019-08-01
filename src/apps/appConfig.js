@@ -24,7 +24,7 @@ export default {
         minh: 181
     },
     Notepad: {
-        w: 200,
+        w: 400,
         h: 325,
         maxw: 800,
         maxh: 900,

@@ -52,6 +52,14 @@
     overflow: hidden;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 100;
+  }
+
+  p {
+    font-family: Arial, sans-serif;
+  }
+
   button, input[type='text'], input[type='password'], input[type='number'], select {
     transition: 40ms all;
     display: block;

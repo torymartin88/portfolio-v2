@@ -17,7 +17,6 @@ export const mutations = {
   },
 
   SET_ACTIVE(state, window_id) {
-    console.log(window_id)
     const window = state.windows.filter(w => w.id === window_id)
     window[0].active = true
   },

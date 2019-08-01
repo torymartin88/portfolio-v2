@@ -166,7 +166,6 @@ $accent = #f49e3f;
   display: flex;
   padding: 6px;
   flex-direction: column;
-  background-color: $light;
 }
 
 .calculator-total {
@@ -229,6 +228,7 @@ $accent = #f49e3f;
   transition: all 20ms ease-in-out;
   justify-content: center;
   background: $white;
+  border-radius: 0;
 
   &:hover {
     background: darken($white, 5%);

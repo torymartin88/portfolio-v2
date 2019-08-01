@@ -24,6 +24,13 @@ for (let key in appConfig) {
     Vue.component(key, () => import(`@/apps/${key}.vue`))
 }
 
+// global directives
+Vue.directive('focus', {
+    inserted: function (el) {
+        el.focus()
+    }
+})
+
 new Vue({
   router,
   store,
