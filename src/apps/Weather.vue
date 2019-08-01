@@ -67,7 +67,7 @@ export default {
       self.$http.post(`/api/address`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
         console.log(response)
         // just grab the locality (city) for now
-        self.address = response.body.results[0].address_components.filter((item) => item.types.includes('locality'))
+        self.address = response.body.results[0].address_components.filter((item) => item.types.includes('locality'))[0].short_name
       }, response => {
         console.error('could not get data', response)
       })

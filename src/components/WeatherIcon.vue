@@ -33,8 +33,8 @@ export default {
           'wind',
           'fog',
           'cloud',
-          'partly-cloud-day',
-          'partly-cloud-night'
+          'partly-cloudy-day',
+          'partly-cloudy-night'
         ].indexOf(value) !== -1
       }
     },
