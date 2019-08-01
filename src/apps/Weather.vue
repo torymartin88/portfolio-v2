@@ -28,14 +28,14 @@ export default {
       self.location = position
       self.$http.post(`/api/weather`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
         console.log(response)
-        self.forecast = response
+        self.forecast = response.body
       }, response => {
         console.error('could not get data', response)
       })
 
       self.$http.post(`/api/address`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
         console.log(response)
-        self.address = response
+        self.address = response.body
       }, response => {
         console.error('could not get data', response)
       })
