@@ -7,7 +7,7 @@
       feels like: {{forecast.currently.apparentTemperature}}
     </div>
     <div v-if="address">
-      {{address.formatted_address}}
+      {{address}}
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@ export default {
 
       self.$http.post(`/api/address`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
         console.log(response)
-        self.address = response.body
+        self.address = response.body.results[0].formatted_address
       }, response => {
         console.error('could not get data', response)
       })
