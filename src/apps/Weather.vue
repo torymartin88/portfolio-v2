@@ -1,11 +1,14 @@
 <template>
   <div class="weather">
-    {{forecast.currently.temperature}}<br>
-    {{forecast.hourly.summary}}
-    <hr>
-    feels like: {{forecast.currently.apparentTemperature}}
-    <hr>
-    {{address.formatted_address}}
+    <div v-if="forecast">
+      {{forecast.currently.temperature}}<br>
+      {{forecast.hourly.summary}}
+      <hr>
+      feels like: {{forecast.currently.apparentTemperature}}
+    </div>
+    <div v-if="address">
+      {{address.formatted_address}}
+    </div>
   </div>
 </template>
 
