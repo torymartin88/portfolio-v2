@@ -20,7 +20,7 @@ export default {
 
     navigator.geolocation.getCurrentPosition((position) => {
       self.location = position
-      self.$http.get(`https://api.darksky.net/forecast/618ee46bab6b7bd5d7836bf24bf307d2/${position.coords.latitude},${position.coords.longitude}`).then(response => {
+      self.$http.post(`/api/weather`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
         console.log(response)
         self.forecast = response
       }, response => {
