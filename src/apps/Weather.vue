@@ -1,6 +1,11 @@
 <template>
   <div class="weather">
-    {{location}}
+    {{forecast.currently.temperature}}<br>
+    {{forecast.hourly.summary}}
+    <hr>
+    feels like: {{forecast.currently.apparentTemperature}}
+    <hr>
+    {{address.formatted_address}}
   </div>
 </template>
 
@@ -22,14 +27,14 @@ export default {
     navigator.geolocation.getCurrentPosition((position) => {
       self.location = position
       self.$http.post(`/api/weather`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
-        console.log(`forecast: ${response}`)
+        console.log(response)
         self.forecast = response
       }, response => {
         console.error('could not get data', response)
       })
 
       self.$http.post(`/api/address`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
-        console.log(`address: ${response}`)
+        console.log(response)
         self.address = response
       }, response => {
         console.error('could not get data', response)
