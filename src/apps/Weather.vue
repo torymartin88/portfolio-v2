@@ -28,7 +28,7 @@ export default {
         console.error('could not get data', response)
       })
 
-      self.$http.post(`/api/location`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
+      self.$http.post(`/api/address`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
         console.log(`address: ${response}`)
         self.address = response
       }, response => {
