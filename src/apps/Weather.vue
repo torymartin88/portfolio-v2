@@ -52,7 +52,7 @@ export default {
       self.$http.post(`/api/weather`, { lat: position.coords.latitude, long: position.coords.longitude }).then(response => {
         console.log(response)
         // grab a few things from the response
-        self.temperature = response.body.currently.temperature
+        self.temperature = Math.round(response.body.currently.temperature)
         self.summary = response.body.currently.summary
         self.windSpeed = response.body.currently.windSpeed
         self.rainChance = response.body.currently.precipProbability
