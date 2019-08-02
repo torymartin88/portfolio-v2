@@ -1,13 +1,29 @@
 <template>
-  <div class="window" v-bind:class="{ active: active, 'scroll-whole-window': scroll }" @click="windowActive">
+  <div
+    class="window"
+    v-bind:class="{ active: active, 'scroll-whole-window': scroll }"
+    @click="windowActive"
+  >
     <div class="window-header">
       <div class="close no-drag" @click="closeWindow"></div>
       <div class="spacer">
-        <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
       </div>
       <div>{{activeComponent}}</div>
       <div class="spacer">
-        <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
       </div>
       <!-- <div class="close no-drag"></div> -->
     </div>
@@ -56,13 +72,13 @@ export default {
 .window {
   background: #DEDEDE;
   border: 1px solid #303030;
-  box-shadow: inset 0.5px 0.5px 1px 1px rgba(255,255,255,0.5), inset -0.5px -0.5px 1px 1px rgba(0,0,0,0.5)
+  box-shadow: inset 0.5px 0.5px 1px 1px rgba(255, 255, 255, 0.5), inset -0.5px -0.5px 1px 1px rgba(0, 0, 0, 0.5);
   height: 100%;
   opacity: 0.9;
 
   &.active {
     opacity: 1;
-    box-shadow: 2px 3px 0 0 rgba(0,0,0,0.8), inset 0.5px 0.5px 1px 1px rgba(255,255,255,0.5), inset -0.5px -0.5px 1px 1px rgba(0,0,0,0.5)
+    box-shadow: 2px 3px 0 0 rgba(0, 0, 0, 0.8), inset 0.5px 0.5px 1px 1px rgba(255, 255, 255, 0.5), inset -0.5px -0.5px 1px 1px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -104,7 +120,7 @@ export default {
       background: #ffffff;
       display: block;
       margin-bottom: 1px;
-      box-shadow: 1px 1px rgba(0,0,0,.4);
+      box-shadow: 1px 1px rgba(0, 0, 0, 0.4);
     }
   }
 
@@ -126,10 +142,10 @@ export default {
   margin-left: 3px;
   margin-right: 3px;
   border: 1px solid #525252;
-  box-shadow: -0.5px -0.5px 1px #b9b9b9, 0.5px 0.5px 1px rgba(255,255,255,1)
+  box-shadow: -0.5px -0.5px 1px #b9b9b9, 0.5px 0.5px 1px rgba(255, 255, 255, 1);
   height: calc(100% - 27px);
   user-select: none;
-  
+
   .scroll-whole-window & {
     overflow-y: auto;
   }

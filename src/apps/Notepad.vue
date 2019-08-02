@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import marked from 'marked'
-import purify from 'dompurify'
+import marked from "marked";
+import purify from "dompurify";
 
 export default {
   name: "Calculator",
@@ -18,90 +18,90 @@ export default {
     };
   },
   computed: {
-    compiledMarkdown: function () {
-      return purify.sanitize(marked(this.content))
+    compiledMarkdown: function() {
+      return purify.sanitize(marked(this.content));
     }
   },
   methods: {
     updatePreview(e) {
-      this.content = e.target.value
+      this.content = e.target.value;
     }
   }
 };
 </script>
 
 <style lang="stylus">
-  .notepad {
-    height: 100%;
-    font-size: 0;
-    display: flex;
+.notepad {
+  height: 100%;
+  font-size: 0;
+  display: flex;
+}
+
+textarea {
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  padding: 5px;
+  line-height: 1.25;
+  resize: none;
+  border: none;
+  background: none;
+
+  &:focus {
+    outline: none;
   }
 
-  textarea {
-    width: 100%;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-    padding: 5px;
-    line-height: 1.25;
-    resize: none;
-    border: none;
-    background: none;
-
-    &:focus {
-      outline: none;
-    }
-
-    .show-preview & {
-      width: 50%;
-    }
-  }
-
-  .preview {
+  .show-preview & {
     width: 50%;
-    height: 100%;
-    overflow: hidden;
-    overflow-y: auto;
-    font-size: 12px;
-    font-weight: 100;
-    border-left: 1px solid #000000;
-    padding: 0 20px;
-    word-break: break-word;
+  }
+}
 
-    h1, h2, h3, h4, h5, h6 {
-      position: relative;
+.preview {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  font-size: 12px;
+  font-weight: 100;
+  border-left: 1px solid #000000;
+  padding: 0 20px;
+  word-break: break-word;
 
-      &::before {
-        position: absolute;
-        left: -15px;
-        font-size: 10px;
-        font-family: Arial;
-        color: #9e9e9e;
-      }
-    }
+  h1, h2, h3, h4, h5, h6 {
+    position: relative;
 
-    h1::before {
-      content: 'h1';
-    }
-
-    h2::before {
-      content: 'h2';
-    }
-
-    h3::before {
-      content: 'h3';
-    }
-
-    h4::before {
-      content: 'h4';
-    }
-
-    h5::before {
-      content: 'h5';
-    }
-
-    h6::before {
-      content: 'h6';
+    &::before {
+      position: absolute;
+      left: -15px;
+      font-size: 10px;
+      font-family: Arial;
+      color: #9e9e9e;
     }
   }
+
+  h1::before {
+    content: 'h1';
+  }
+
+  h2::before {
+    content: 'h2';
+  }
+
+  h3::before {
+    content: 'h3';
+  }
+
+  h4::before {
+    content: 'h4';
+  }
+
+  h5::before {
+    content: 'h5';
+  }
+
+  h6::before {
+    content: 'h6';
+  }
+}
 </style>
