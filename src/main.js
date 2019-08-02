@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueDraggableResizable from 'vue-draggable-resizable'
 import VueResource from 'vue-resource'
+import VueYoutube from 'vue-youtube'
 
 import App from './App.vue'
 import router from './router'
@@ -13,6 +14,7 @@ import './assets/styles/webfonts.css'
 Vue.config.productionTip = false
 
 Vue.use(VueResource)
+Vue.use(VueYoutube)
 
 Vue.component('vue-draggable-resizable', VueDraggableResizable)
 

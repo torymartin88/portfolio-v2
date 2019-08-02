@@ -31,6 +31,7 @@ export default {
 </script>
 
 <style lang="stylus">
+
 .notepad {
   height: 100%;
   font-size: 0;
@@ -40,7 +41,6 @@ export default {
 textarea {
   width: 100%;
   height: 100%;
-  font-family: Arial, sans-serif;
   font-size: 12px;
   padding: 5px;
   line-height: 1.25;
@@ -75,7 +75,7 @@ textarea {
       position: absolute;
       left: -15px;
       font-size: 10px;
-      font-family: Arial;
+      font-alternate()
       color: #9e9e9e;
     }
   }

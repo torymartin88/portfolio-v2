@@ -33,5 +33,11 @@ export default {
         h: 325,
         minw: 200,
         minh: 325
+    },
+    Video: {
+        w: 400,
+        h: 325,
+        minw: 200,
+        minh: 325
     }
 }

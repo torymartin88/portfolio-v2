@@ -5,7 +5,7 @@
         :w="w.w" :h="w.h" :max-width="w.maxw" :max-height="w.maxh" :min-width="w.minw" :min-height="w.minh"
         :z="w.active ? 3 : 2" :parent="true" :active="w.active"
         :handles="['br']" :drag-handle="'.window-header'" :drag-cancel="'.no-drag'" class-name="window"
-        @activated="onActivated(w.id)" @resizestop="onResizeStop(w.id, ...arguments)" @dragstop="onDragStop(w.id, ...arguments)">
+        @activated="onActivated(w.id)" @deactivated="onDeactivated(w.id)" @resizestop="onResizeStop(w.id, ...arguments)" @dragstop="onDragStop(w.id, ...arguments)">
         <Window :component="w.component" :active="w.active" :scroll="w.scroll" @closeWindow="onCloseWindow(w.id)" @activated="onActivated(w.id)" />
       </vue-draggable-resizable>
     </div>
@@ -43,6 +43,10 @@ export default {
     onActivated (id) {
       // tell store which window is active
       this.$store.dispatch('setActiveWindow', id)
+    },
+    onDeactivated (id) {
+      // tell store which window is inactivated
+      this.$store.dispatch('setInactiveWindow', id)
     },
     onResizeStop(id, x, y, w, h) {
       // update window dimensions

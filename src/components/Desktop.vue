@@ -6,6 +6,7 @@
     <button v-on:click="openApp('Calculator')">Open Calculator</button>
     <button v-on:click="openApp('Weather')">Open Weather</button>
     <button v-on:click="openApp('Notepad')">Open Notepad</button>
+    <button v-on:click="openApp('Video')">Open Video</button>
 
     <select>
       <option>First Option</option>

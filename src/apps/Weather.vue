@@ -86,7 +86,7 @@ export default {
 
       p {
         margin: 0;
-        font-family: chicago, Arial, Helvetica, sans-serif
+        font-base();
       }
   }
 

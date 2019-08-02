@@ -49,6 +49,12 @@ export default {
         commit("SET_WINDOW_ACTIVE", id);
     },
 
+    setInactiveWindow({ commit }, id) {
+        // inactivate window with passed in id
+        commit("SET_WINDOW_INACTIVE", id);
+    },
+
+
     setWindowDimensions({ commit }, obj) {
         // set window position with obj (id, w, h)
         commit("SET_WINDOW_DIMENSIONS", obj);
