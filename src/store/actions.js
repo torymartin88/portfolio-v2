@@ -18,7 +18,7 @@ export default {
 
     // if the app is already open, just focus that window
     if (appAlreadyOpen) {
-      commit("SET_ACTIVE", appAlreadyOpen)
+      commit("SET_WINDOW_ACTIVE", appAlreadyOpen)
 
     // otherwise open the app
     } else {
@@ -28,11 +28,13 @@ export default {
         y: 200,
         w: compConfig.w,
         h: compConfig.h,
+        resizable: compConfig.resizable,
         maxw: compConfig.maxw,
         maxh: compConfig.maxh,
         minw: compConfig.minw,
         minh: compConfig.minh,
-        active: true
+        active: true,
+        scroll: compConfig.scroll
       });
     }
   },
@@ -40,11 +42,21 @@ export default {
   setActiveWindow({ commit, state }, id) {
     // set all windows to inactive
     for (let window of state.windows) {
-      commit("SET_INACTIVE", window.id)
+      commit("SET__WINDOW_INACTIVE", window.id)
     }
 
     // activate window with passed in id
-    commit("SET_ACTIVE", id)
+    commit("SET_WINDOW_ACTIVE", id)
+  },
+
+  setWindowDimensions({ commit }, obj) {
+    // set window position with obj (id, w, h)
+    commit("SET_WINDOW_DIMENSIONS", obj)
+  },
+
+  setWindowPosition({ commit }, obj) {
+    // set window position with obj (id, x, y)
+    commit("SET_WINDOW_POSITION", obj)
   },
 
   closeWindow({ commit }, id) {

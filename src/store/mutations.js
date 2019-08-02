@@ -16,12 +16,24 @@ export const mutations = {
     state.windows.splice(removeIndex, 1);
   },
 
-  SET_ACTIVE(state, window_id) {
+  SET_WINDOW_ACTIVE(state, window_id) {
     const window = state.windows.filter(w => w.id === window_id)
     window[0].active = true
   },
 
-  SET_INACTIVE(state, window_id) {
+  SET_WINDOW_INACTIVE(state, window_id) {
     state.windows.filter(w => w.id === window_id)[0].active = false
-  }
+  },
+
+  SET_WINDOW_DIMENSIONS(state, obj) {
+    const window = state.windows.filter(w => w.id === obj.id)
+    window[0].h = obj.h
+    window[0].w = obj.w
+  },
+
+  SET_WINDOW_POSITION(state, obj) {
+    const window = state.windows.filter(w => w.id === obj.id)
+    window[0].x = obj.x
+    window[0].y = obj.y
+  },
 };

@@ -36,7 +36,7 @@ export default {
       locationData: null,
       address: 'Loading...',
       temperature: '-',
-      summary: null,
+      summary: '-',
       iconType: null,
       windSpeed: '-',
       rainChance: '-',
@@ -86,6 +86,7 @@ export default {
 
       p {
         margin: 0;
+        font-family: chicago, Arial, Helvetica, sans-serif
       }
   }
 

@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersistence from 'vuex-persist';
+
 import { mutations } from './mutations'
 import actions from './actions'
 
@@ -28,5 +30,6 @@ export default new Vuex.Store({
     modules: {
         time,
     },
+    plugins: [new VuexPersistence().plugin],
     strict: debug
 })

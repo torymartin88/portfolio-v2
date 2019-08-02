@@ -1,5 +1,5 @@
 <template>
-  <div class="window" v-bind:class="{ active: active }" @click="windowActive">
+  <div class="window" v-bind:class="{ active: active, 'scroll-whole-window': scroll }" @click="windowActive">
     <div class="window-header">
       <div class="close no-drag" @click="closeWindow"></div>
       <div class="spacer">
@@ -26,6 +26,9 @@ export default {
       required: true
     },
     active: {
+      type: Boolean
+    },
+    scroll: {
       type: Boolean
     }
   },
@@ -126,6 +129,9 @@ export default {
   box-shadow: -0.5px -0.5px 1px #b9b9b9, 0.5px 0.5px 1px rgba(255,255,255,1)
   height: calc(100% - 27px);
   user-select: none;
-  overflow-y: auto;
+  
+  .scroll-whole-window & {
+    overflow-y: auto;
+  }
 }
 </style>
