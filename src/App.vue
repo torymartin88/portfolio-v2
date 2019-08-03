@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <MenuBar />
+    <Dock />
     <Desktop />
     <router-view />
   </div>
@@ -10,16 +11,21 @@
 // @ is an alias to /src
 import MenuBar from "@/components/MenuBar.vue";
 import Desktop from "@/components/Desktop.vue";
+import Dock from "@/components/Dock.vue";
 
 export default {
   name: "app",
   components: {
     MenuBar,
-    Desktop
+    Desktop,
+    Dock
   },
   mounted() {
     // start global time
     this.$store.dispatch("time/start");
+
+    // register apps
+    this.$store.dispatch("registerApps");
   }
 };
 </script>

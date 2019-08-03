@@ -1,35 +1,36 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import VuexPersistence from 'vuex-persist';
+import Vue from "vue";
+import Vuex from "vuex";
+import VuexPersistence from "vuex-persist";
 
-import { mutations } from './mutations'
-import actions from './actions'
+import { mutations } from "./mutations";
+import actions from "./actions";
 
-import time from './modules/time'
+import time from "./modules/time";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-const debug = process.env.NODE_ENV !== 'production'
+const debug = process.env.NODE_ENV !== "production";
 
 export default new Vuex.Store({
-    state: {
-        windows: [],
-        windowCount: 0,
-        activeWindow: null
+  state: {
+    apps: [],
+    windows: [],
+    windowCount: 0,
+    activeWindow: null
+  },
+  getters: {
+    getActiveWindow: state => {
+      return state.activeWindow;
     },
-    getters: {
-        getActiveWindow: state => {
-            return state.activeWindow
-        },
-        getWindowById: (state) => (id)  =>{
-            return state.windows.filter(w => w.id === id)
-        }
-    },
-    actions,
-    mutations,
-    modules: {
-        time,
-    },
-    plugins: [new VuexPersistence().plugin],
-    strict: debug
-})
+    getWindowById: state => id => {
+      return state.windows.filter(w => w.id === id);
+    }
+  },
+  actions,
+  mutations,
+  modules: {
+    time
+  },
+  plugins: [new VuexPersistence().plugin],
+  strict: debug
+});

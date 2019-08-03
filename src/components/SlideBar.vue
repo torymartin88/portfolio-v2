@@ -351,7 +351,6 @@ export default {
       return inRange(val);
     },
     syncValue() {
-      let val = this.val;
       if (this.range) {
         this.$emit("callbackRange", this.range[this.currentIndex]);
       }

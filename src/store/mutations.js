@@ -4,6 +4,32 @@ if (navigator.userAgent.indexOf("PhantomJS") > -1) {
 }
 
 export const mutations = {
+  CLEAR_APPS(state) {
+    state.apps = []
+  },
+
+  ADD_APP(state, { name, props, open }) {
+    state.apps.push({
+      name: name,
+      icon: props.icon,
+      open: open
+    })
+  },
+
+  OPEN_APP(state, name) {
+    const app = state.apps.filter(a => a.name === name)
+    app[0].open = true
+  },
+
+  CLOSE_APP(state, name) {
+    const app = state.apps.filter(a => a.name === name)
+    app[0].open = false
+  },
+
+  CLEAR_WINDOWS(state) {
+    state.windows = []
+  },
+
   OPEN_WINDOW(state, window) {
     state.windowCount++
     window.id = state.windowCount
@@ -12,7 +38,7 @@ export const mutations = {
   },
 
   CLOSE_WINDOW(state, id) {
-    var removeIndex = state.windows.map((w) => w.id).indexOf(id)
+    var removeIndex = state.windows.map(w => w.id).indexOf(id)
     state.windows.splice(removeIndex, 1);
   },
 
