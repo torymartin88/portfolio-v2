@@ -2,11 +2,15 @@
   <div class="menu-bar">
     <div class="actions">
       <ul>
+        <li class="app-name">{{activeWindow.component}}</li>
         <li>File</li>
         <li>Edit</li>
       </ul>
     </div>
     <div class="top-right">
+      <div class="fullscreen item" @click="goFullscreen()">
+        Go Fullscreen
+      </div>
       <div class="time item">
         {{time}}
       </div>
@@ -23,10 +27,19 @@ export default {
     msg: String
   },
   computed: {
+    apps() {
+      return this.$store.state.apps;
+    },
     ...mapGetters({
-      time: 'time/formattedDate'
+      time: 'time/formattedDate',
+      activeWindow: 'getActiveWindow'
     })
   },
+  methods: {
+    goFullscreen() {
+      document.body.requestFullscreen()
+    }
+  }
 };
 </script>
 
@@ -43,9 +56,21 @@ export default {
 
 .actions {
   flex-grow: 1;
+  padding-left: 10px;
+
+  li {
+    font-weight: 100;
+    font-style: italic
+  }
+
+  .app-name {
+    font-style: normal
+  }
 }
 
 .top-right {
+  display: flex;
+
   .item {
     padding: 5px;
     &:hover {
@@ -54,6 +79,8 @@ export default {
     }
   }
 }
+
+
 
 ul {
   list-style: none;

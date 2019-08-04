@@ -35,6 +35,7 @@ export const mutations = {
     window.id = state.windowCount
 
     state.windows.push(window);
+    state.activeWindow = window.id
   },
 
   CLOSE_WINDOW(state, id) {
@@ -45,6 +46,7 @@ export const mutations = {
   SET_WINDOW_ACTIVE(state, window_id) {
     const window = state.windows.filter(w => w.id === window_id)
     window[0].active = true
+    state.activeWindow = window_id
   },
 
   SET_WINDOW_INACTIVE(state, window_id) {

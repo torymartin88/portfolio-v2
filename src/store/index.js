@@ -20,7 +20,7 @@ export default new Vuex.Store({
   },
   getters: {
     getActiveWindow: state => {
-      return state.activeWindow;
+      return state.windows.filter(w => w.id === state.activeWindow)[0];
     },
     getWindowById: state => id => {
       return state.windows.filter(w => w.id === id);

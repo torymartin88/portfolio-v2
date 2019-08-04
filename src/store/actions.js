@@ -1,5 +1,4 @@
 import config from "../apps/appConfig";
-import { ObjectUnsubscribedError } from "rxjs";
 
 export default {
   /* registerApps
