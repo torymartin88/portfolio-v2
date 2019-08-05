@@ -57,7 +57,8 @@ export default {
         minh: compConfig.minh,
         active: true,
         scroll: compConfig.scroll,
-        icon: compConfig.icon || ""
+        icon: compConfig.icon || "",
+        prettyName: compConfig.prettyName || compConfig.component,
       });
     }
   },

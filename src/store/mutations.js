@@ -12,6 +12,7 @@ export const mutations = {
     state.apps.push({
       name: name,
       icon: props.icon,
+      prettyName: props.prettyName || name,
       open: open
     })
   },

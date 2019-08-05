@@ -72,13 +72,14 @@ export default {
 .window {
   background: #DEDEDE;
   border: 1px solid #303030;
-  box-shadow: inset 0.5px 0.5px 1px 1px rgba(255, 255, 255, 0.5), inset -0.5px -0.5px 1px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.22), inset 1px 1px 0 rgba(255, 255, 255, 0.25), inset -1px -1px 0 rgba(0, 0, 0, 0.25);
   height: 100%;
   opacity: 0.9;
+  transition: box-shadow 100ms ease-in-out, opacity 20ms ease-in-out;
 
   &.active {
     opacity: 1;
-    box-shadow: 2px 3px 0 0 rgba(0, 0, 0, 0.8), inset 0.5px 0.5px 1px 1px rgba(255, 255, 255, 0.5), inset -0.5px -0.5px 1px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 4px 2px 0 0 rgba(0, 0, 0, 0.22), inset 1px 1px 0 rgba(255, 255, 255, 0.25), inset -1px -1px 0 rgba(0, 0, 0, 0.25)
   }
 }
 
@@ -94,33 +95,35 @@ export default {
   padding: 4px;
 
   .close {
-    background-image: linear-gradient(135deg, #9d9e9d 0%, #ffffff 100%);
+    background: #d6d6d6;
     border: 1px solid #525252;
-    box-shadow: 0.5px 0.5px 1px 0 #FFFFFF, -0.5px -0.5px 1px 0 #9E9E9E, inset 0.5px 0.5px 1px 1px rgba(255, 255, 255, 0.5), inset -0.5px -0.5px 1px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px #fff, -1px -1px #9e9e9e, inset 1px 1px rgba(255,255,255,0.5), inset -1px -1px rgba(0,0,0,0.5);
     width: 14px;
     height: 14px;
     cursor: pointer;
+    transition: opacity 20ms ease-in-out;
 
     &:hover {
-      background-image: linear-gradient(135deg, darken(#9D9E9D, 5%) 0%, darken(#F3F2F3, 5%) 100%);
+      background: darken(#d6d6d6, 5%);
     }
 
     &:active {
-      background-image: linear-gradient(135deg, darken(#9D9E9D, 15%) 0%, darken(#F3F2F3, 15%) 100%);
+      background: darken(#d6d6d6, 15%);
     }
   }
 
   .spacer {
     flex-grow: 1;
     padding: 0 5px;
+    transition: opacity 20ms ease-in-out;
 
     i {
       width: 100%;
       height: 1px;
-      background: #ffffff;
+      background: #ececec;
       display: block;
       margin-bottom: 1px;
-      box-shadow: 1px 1px rgba(0, 0, 0, 0.4);
+      box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
     }
   }
 
