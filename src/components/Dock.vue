@@ -1,13 +1,20 @@
 <template>
   <div class="dock">
     <div class="dock-content">
-      <DockItem v-for="a in apps" :key="a.name" :appName="a.prettyName" :icon="a.icon" :open="a.open" @click="openApp(a.name)"></DockItem>
+      <DockItem
+        v-for="a in apps"
+        :key="a.name"
+        :appName="a.prettyName"
+        :icon="a.icon"
+        :open="a.open"
+        @click="openApp(a.name)"
+      ></DockItem>
     </div>
   </div>
 </template>
 
 <script>
-import DockItem from '@/components/DockItem.vue'
+import DockItem from "@/components/DockItem.vue";
 
 export default {
   name: "Dock",
@@ -51,6 +58,6 @@ export default {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   transition: all 250ms ease-in-out;
-  box-shadow: inset 1px 1px 0 rgb(214, 213, 213), inset 2px 2px 0px rgb(255, 255, 255), inset -1px -1px 0 rgba(0,0,0,0.25);
+  box-shadow: inset 1px 1px 0 rgb(214, 213, 213), inset 2px 2px 0px rgb(255, 255, 255), inset -1px -1px 0 rgba(0, 0, 0, 0.25);
 }
 </style>
