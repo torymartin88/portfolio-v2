@@ -2,14 +2,16 @@
   <div class="menu-bar">
     <div class="actions">
       <ul>
-        <li class="app-name">{{activeWindow.component}}</li>
+        <li class="app-name" v-if="!activeWindow">Desktop</li>
+        <li class="app-name" v-if="activeWindow">{{activeWindow.component}}</li>
         <li>File</li>
         <li>Edit</li>
       </ul>
     </div>
     <div class="top-right">
-      <div class="fullscreen item" @click="goFullscreen()">
-        Go Fullscreen
+      <div class="fullscreen item" @click="toggleFullscreen()">
+        <template v-if="!fullscreen">Go Fullscreen</template>
+        <template v-if="fullscreen">Exit Fullscreen</template>
       </div>
       <div class="time item">
         {{time}}
@@ -26,6 +28,11 @@ export default {
   props: {
     msg: String
   },
+  data() {
+    return {
+      fullscreen: false
+    }
+  },
   computed: {
     apps() {
       return this.$store.state.apps;
@@ -36,8 +43,14 @@ export default {
     })
   },
   methods: {
-    goFullscreen() {
-      document.body.requestFullscreen()
+    toggleFullscreen() {
+      if (this.fullscreen) {
+        document.exitFullscreen()
+      } else {
+        document.body.requestFullscreen()
+      }
+
+      this.fullscreen = !this.fullscreen
     }
   }
 };
