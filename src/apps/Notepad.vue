@@ -22,9 +22,22 @@ export default {
       return purify.sanitize(marked(this.content));
     }
   },
+  watch: {
+    content: {
+      handler() {
+        localStorage.setItem('classic::notes', JSON.stringify(this.content))
+      }
+    }
+  },
   methods: {
     updatePreview(e) {
       this.content = e.target.value;
+    }
+  },
+  mounted() {
+    const data = localStorage.getItem('classic::notes')
+    if (data) {
+      this.content = JSON.parse(data)
     }
   }
 };
