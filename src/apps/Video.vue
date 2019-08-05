@@ -123,6 +123,7 @@ function zeroFill(number, width) {
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   iframe {
     width: 100%;
@@ -133,11 +134,10 @@ function zeroFill(number, width) {
     display: flex;
     height: 25px;
     align-items: center;
+    z-index: 1
   }
 
   .controls-left {
-    // width: 70px;
-
     .button {
       border: 1px solid #656565;
       width: 24px;
@@ -150,10 +150,6 @@ function zeroFill(number, width) {
       svg {
         fill: $gray-6
       }
-    }
-
-    .play-button {
-
     }
   }
 
@@ -175,15 +171,31 @@ function zeroFill(number, width) {
   }
 
   .overlay {
-    width: 100%;
-    height: calc(100% - 25px);
-    left: 0;
-    top: 0;
+    height: 300%;
+    width: 300%;
+    left: -50%;
+    opacity: 0.3;
+    top: -110%;
     display: block;
     position: absolute;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAEAQMAAACTPww9AAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAA1JREFUCNdjOACEQAAACQgBgeEHEZ0AAAAASUVORK5CYII=');
-    background-size: 2px 2px;
+    animation: grain 8s steps(10) infinite;
+    background: url(../assets/img/noise.png);
     pointer-events: none;
   }
 }
+
+
+@keyframes grain {
+  0%, 100% { transform:translate(0, 0) }
+  10% { transform:translate(-5%, -10%) }
+  20% { transform:translate(-15%, 5%) }
+  30% { transform:translate(7%, -25%) }
+  40% { transform:translate(-5%, 25%) }
+  50% { transform:translate(-15%, 10%) }
+  60% { transform:translate(15%, 0%) }
+  70% { transform:translate(0%, 15%) }
+  80% { transform:translate(3%, 35%) }
+  90% { transform:translate(-10%, 10%) }
+}
+
 </style>
