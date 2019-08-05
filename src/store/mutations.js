@@ -64,4 +64,11 @@ export const mutations = {
     window[0].x = obj.x
     window[0].y = obj.y
   },
+
+  SET_QUOTE_OF_DAY(state, { quote, author, background, date }) {
+    state.quoteOfDay.quote = quote
+    state.quoteOfDay.author = author
+    state.quoteOfDay.background = background
+    state.quoteOfDay.date = date
+  },
 };

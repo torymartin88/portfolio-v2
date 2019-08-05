@@ -90,5 +90,9 @@ export default {
   closeWindow({ commit, getters }, id) {
     commit("CLOSE_APP", getters.getWindowById(id)[0].component);
     commit("CLOSE_WINDOW", id);
-  }
+  },
+
+  setQuoteOfDay({ commit }, obj) {
+    commit("SET_QUOTE_OF_DAY", obj);
+  },
 };

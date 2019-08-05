@@ -16,7 +16,8 @@ export default new Vuex.Store({
     apps: [],
     windows: [],
     windowCount: 0,
-    activeWindow: null
+    activeWindow: null,
+    quoteOfDay: null
   },
   getters: {
     getActiveWindow: state => {
