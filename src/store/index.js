@@ -26,6 +26,10 @@ export default new Vuex.Store({
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0]
     ],
+    desktopColors: {
+      primary: '#fafbfb',
+      secondary: '#20242b',
+    },
     activeWindow: null,
     quoteOfDay: null
   },

@@ -80,4 +80,12 @@ export const mutations = {
   SET_DESKTOP_PATTERN_CELL(state, { row, col, value }) {
     state.desktopPattern[row].splice(col, 1, value)
   },
+
+  SET_DESKTOP_PRIMARY_COLOR(state, color) {
+    state.desktopColors.primary = color
+  },
+
+  SET_DESKTOP_SECONDARY_COLOR(state, color) {
+    state.desktopColors.secondary = color
+  },
 };

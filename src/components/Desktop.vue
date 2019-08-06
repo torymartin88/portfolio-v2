@@ -23,27 +23,33 @@ export default {
     },
     desktopPattern() {
       return this.$store.state.desktopPattern;
+    },
+    desktopColors() {
+      return this.$store.state.desktopColors;
     }
   },
   watch: {
-    desktopPattern: {
-      handler: (val) => {
-        generateBackground(val)
-      },
-      deep: true
+    desktopPattern() {
+      generateBackground(this.desktopPattern, this.desktopColors.primary, this.desktopColors.secondary);
+    },
+    'desktopColors.primary': function (val) {
+      generateBackground(this.desktopPattern, this.desktopColors.primary, this.desktopColors.secondary);
+    },
+    'desktopColors.secondary': function (val) {
+      generateBackground(this.desktopPattern, this.desktopColors.primary, this.desktopColors.secondary);
     }
   },
-  mounted() {
+  mounted() { 
     let self = this;
 
     this.$nextTick(() => {
       window.addEventListener('resize', debounce(() => {
-          generateBackground(self.$store.state.desktopPattern);
+        let primaryColor = self.$store.state.desktopColors.primary;
+        let secondaryColor = self.$store.state.desktopColors.secondary;
+
+        generateBackground(self.$store.state.desktopPattern, primaryColor, secondaryColor);
       }, 200));
     })
-
-    // set up random pixel data
-    let pixelData = this.$store.state.desktopPattern;
 
     // if (pixelData.length === null) {
     //   for (let x = 0; x < patternWidth; x++) {
@@ -59,13 +65,16 @@ export default {
     //   this.$store.dispatch("setDesktopPattern", pixelData);
     // }
 
-    generateBackground(pixelData);
+    generateBackground(this.desktopPattern, this.desktopColors.primary, this.desktopColors.secondary);
   }
 };
 
-function generateBackground(pixelData) {
+function generateBackground(pixelData, primaryColor, secondaryColor) {
   const width = window.innerWidth;
   const height = window.innerHeight;
+
+  const primaryRGB = hexToRgb(primaryColor);
+  const secondaryRGB = hexToRgb(secondaryColor);
 
   let ctx = document.getElementById("desktop-background").getContext("2d");
   ctx.canvas.width = width;
@@ -87,11 +96,12 @@ function generateBackground(pixelData) {
     let x = (i / 4) % patternWidth;
     let y = Math.floor(i / (patternWidth * 4));
 
-    if (pixelData[y][x]) {
-      let color = pixelData[y][x] ? 25 : 215;
-      tempImageData.data[i] = color;
-      tempImageData.data[i + 1] = color;
-      tempImageData.data[i + 2] = color;
+    if (pixelData[y][x] !== null) {
+      let color = !pixelData[y][x] ? primaryRGB : secondaryRGB;
+
+      tempImageData.data[i] = color.r;
+      tempImageData.data[i + 1] = color.g;
+      tempImageData.data[i + 2] = color.b;
       tempImageData.data[i + 3] = 255;
     }
   }
@@ -114,6 +124,15 @@ function generateBackground(pixelData) {
       );
     }
   }
+}
+
+function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
 }
 </script>
 

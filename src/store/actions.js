@@ -104,4 +104,12 @@ export default {
   setDesktopPatternCell({ commit }, obj) {
     commit("SET_DESKTOP_PATTERN_CELL", obj);
   },
+
+  setDesktopPrimaryColor({ commit }, color) {
+    commit("SET_DESKTOP_PRIMARY_COLOR", color);
+  },
+
+  setDesktopSecondaryColor({ commit }, color) {
+    commit("SET_DESKTOP_SECONDARY_COLOR", color);
+  },
 };

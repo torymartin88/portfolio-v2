@@ -21,6 +21,7 @@
     "marked": "^0.7.0",
     "request": "^2.88.0",
     "vue": "^2.6.10",
+    "vue-color": "^2.7.0",
     "vue-draggable-resizable": "^2.0.0-rc2",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.3",

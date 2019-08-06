@@ -25,12 +25,9 @@ export default {
     }
   },
   Settings: {
-    w: 250,
+    w: 325,
     h: 325,
-    maxw: 300,
-    maxh: 325,
-    minw: 200,
-    minh: 325,
+    resizable: false,
     scroll: true,
     prettyName: 'Settings',
     showInDock: false,
