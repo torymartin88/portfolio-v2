@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { debounce } from 'debounce';
+
 export default {
   name: "Desktop",
   methods: {
@@ -25,33 +27,37 @@ export default {
   },
   watch: {
     desktopPattern: {
-      handler: (val, oldVal) => {
-        console.log(val)
+      handler: (val) => {
         generateBackground(val)
       },
       deep: true
     }
   },
   mounted() {
-    const patternWidth = 8;
-    const patternHeight = 8;
+    let self = this;
+
+    this.$nextTick(() => {
+      window.addEventListener('resize', debounce(() => {
+          generateBackground(self.$store.state.desktopPattern);
+      }, 200));
+    })
 
     // set up random pixel data
     let pixelData = this.$store.state.desktopPattern;
 
-    if (pixelData.length === null) {
-      for (let x = 0; x < patternWidth; x++) {
-        pixelData[x] = [];
-        for (let y = 0; y < patternHeight; y++) {
-          let rand = Math.round(Math.random());
+    // if (pixelData.length === null) {
+    //   for (let x = 0; x < patternWidth; x++) {
+    //     pixelData[x] = [];
+    //     for (let y = 0; y < patternHeight; y++) {
+    //       let rand = Math.round(Math.random());
 
-          // set to 0 or 1 (on or off)
-          pixelData[x][y] = rand;
-        }
-      }
+    //       // set to 0 or 1 (on or off)
+    //       pixelData[x][y] = rand;
+    //     }
+    //   }
 
-      this.$store.dispatch("setDesktopPattern", pixelData);
-    }
+    //   this.$store.dispatch("setDesktopPattern", pixelData);
+    // }
 
     generateBackground(pixelData);
   }
@@ -81,8 +87,8 @@ function generateBackground(pixelData) {
     let x = (i / 4) % patternWidth;
     let y = Math.floor(i / (patternWidth * 4));
 
-    if (pixelData[x][y]) {
-      let color = pixelData[x][y] ? 25 : 215;
+    if (pixelData[y][x]) {
+      let color = pixelData[y][x] ? 25 : 215;
       tempImageData.data[i] = color;
       tempImageData.data[i + 1] = color;
       tempImageData.data[i + 2] = color;
