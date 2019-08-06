@@ -1,14 +1,16 @@
 <template>
   <div class="quotes">
     <blockquote>
-      {{quote}}
-      <br />
-      {{author}}
+      <span class="quote">{{quote}}</span>
+      <span class="author">{{author}}</span>
     </blockquote>
   </div>
 </template>
 
 <script>
+import { db } from '@/db'
+const quotes = db.collection('quotes')
+
 export default {
   name: "Quotes",
   data() {
@@ -21,12 +23,24 @@ export default {
   mounted() {
     const self = this;
 
-    console.log(new Date(self.$store.state.quoteOfDay.date).getTime(), new Date().getTime())
+    var query = quotes.get().then(querySnapshot => {
+      querySnapshot.forEach(function(doc) {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        let data = doc.data();
+        self.quote = data.quote;
+        self.author = data.author;
+    });
+    }).catch(error => {
+      console.log("Error getting document:", error);
+    })
+
+    // console.log(new Date(self.$store.state.quoteOfDay.date).getTime(), new Date().getTime())
     // get from cache if it's there and it's still today's quote
     // if (self.$store.state.quoteOfDay.quote && new Date(self.$store.state.quoteOfDay.date).getTime() === new Date().getTime()) {
-      self.quote = self.$store.state.quoteOfDay.quote;
-      self.author = self.$store.state.quoteOfDay.author;
-      self.image = self.$store.state.quoteOfDay.background;
+      // self.quote = self.$store.state.quoteOfDay.quote;
+      // self.author = self.$store.state.quoteOfDay.author;
+      // self.image = self.$store.state.quoteOfDay.background;
     // } else {
     //   self.$http.get(`https://quotes.rest/qod.json`).then(
     //     response => {
@@ -56,5 +70,29 @@ export default {
 <style lang="stylus" scoped>
 .quotes {
   padding: 10px;
+}
+
+blockquote {
+  position: relative;
+
+  .quote {
+    font-size: 20px;
+    font-family: 'Times'
+  }
+
+  .author {
+    display: block;
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  &:before {
+    content: '"';
+    position: absolute;
+    top: -7px;
+    left: -35px;
+    font-size: 51px;
+    font-family: 'Arial';
+  }
 }
 </style>

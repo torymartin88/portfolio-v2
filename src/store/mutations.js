@@ -72,4 +72,12 @@ export const mutations = {
     state.quoteOfDay.background = background
     state.quoteOfDay.date = date
   },
+
+  SET_DESKTOP_PATTERN(state, { pattern }) {
+    state.desktopPattern = pattern
+  },
+
+  SET_DESKTOP_PATTERN_CELL(state, { row, col, value }) {
+    state.desktopPattern[row].splice(col, 1, value)
+  },
 };

@@ -24,13 +24,29 @@ export default {
       secondaryColor: '#54548E'
     }
   },
-  Quotes: {
+  Settings: {
     w: 250,
     h: 325,
     maxw: 300,
-    maxh: 525,
+    maxh: 325,
     minw: 200,
     minh: 325,
+    scroll: true,
+    prettyName: 'Settings',
+    showInDock: false,
+    icon: {
+      name: 'cog',
+      primaryColor: '#54548E',
+      secondaryColor: '#54548E'
+    }
+  },
+  Quotes: {
+    w: 400,
+    h: 200,
+    maxw: 500,
+    maxh: 325,
+    minw: 300,
+    minh: 200,
     scroll: true,
     prettyName: 'Quotes',
     icon: {

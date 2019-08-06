@@ -96,4 +96,12 @@ export default {
   setQuoteOfDay({ commit }, obj) {
     commit("SET_QUOTE_OF_DAY", obj);
   },
+
+  setDesktopPattern({ commit }, pattern) {
+    commit("SET_DESKTOP_PATTERN", { pattern: pattern });
+  },
+
+  setDesktopPatternCell({ commit }, obj) {
+    commit("SET_DESKTOP_PATTERN_CELL", obj);
+  },
 };

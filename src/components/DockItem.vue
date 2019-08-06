@@ -71,7 +71,7 @@ export default {
   }
 
   .icon {
-    background: #d2d2d8;
+    background: #d4d4d4;
     border-radius: 3px;
     padding: 4px;
     display: flex;
