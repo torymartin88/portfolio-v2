@@ -1,31 +1,47 @@
 <template>
   <div id="app">
-    <MenuBar />
-    <Dock />
-    <Desktop />
-    <router-view />
+    <LoadingScreen v-if="loading" @loaded="loadingDone" />
+    <MenuBar :show="!loading" />
+    <Dock :show="!loading" />
+    <Desktop :show="!loading" />
+    <WindowManager :show="!loading" />
+    <!-- <router-view /> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import LoadingScreen from "@/components/LoadingScreen.vue";
 import MenuBar from "@/components/MenuBar.vue";
 import Desktop from "@/components/Desktop.vue";
 import Dock from "@/components/Dock.vue";
+import WindowManager from "@/views/WindowManager.vue";
 
 export default {
   name: "app",
+  data() {
+    return {
+      loading: false
+    }
+  },
   components: {
+    LoadingScreen,
     MenuBar,
     Desktop,
-    Dock
+    Dock,
+    WindowManager
   },
-  mounted() {
+  created() {
     // start global time
     this.$store.dispatch("time/start");
 
     // register apps
     this.$store.dispatch("registerApps");
+  },
+  methods: {
+    loadingDone() {
+      this.loading = false;
+    }
   }
 };
 </script>
@@ -40,7 +56,7 @@ html {
 }
 
 body {
-  background: #000;
+  background: $pepper500;
   font-smooth: never;
   font-synthesis: style;
   -webkit-font-smoothing: none;
@@ -67,6 +83,14 @@ p {
   font-alternate()
 }
 
+ul {
+  padding-left: 10px;
+
+  li {
+    font-alternate();
+  }
+}
+
 button, input[type='text'], input[type='password'], input[type='number'], select {
   transition: 40ms all;
   display: block;
@@ -77,34 +101,34 @@ button, input[type='text'], input[type='password'], input[type='number'], select
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(0, 0, 0, 1);
+    box-shadow: 0 0 0 1px $salt100, 0 0 0 3px rgba(0, 0, 0, 1);
   }
 }
 
 button, input[type='text'], input[type='password'], input[type='number'] {
   font-size: 16px;
   font-base()
-  background: white;
+  background: $salt100;
   padding: 2px 8px;
-  border: 1px solid #212121;
+  border-mixin($salt100)
   -webkit-appearance: none;
   border-radius: 5px;
 }
 
 input[type='text'] {
   &:focus {
-    background: #000;
-    color: #fff;
+    background: $pepper600;
+    color: $salt100;
   }
 }
 
 button {
   &:hover {
-    background: darken(#fff, 5%);
+    background: darken($salt100, 5%);
   }
 
   &:active {
-    background: darken(#fff, 10%);
+    background: darken($salt100, 10%);
   }
 }
 
@@ -112,19 +136,19 @@ select {
   display: block;
   padding: 2px 23px 2px 8px;
   -webkit-appearance: none;
-  border: 1px solid black;
+  border-mixin()
   border-radius: 0;
   font-size: 16px;
   font-base()
-  background: #ffffff url('assets/img/dropdown.png') no-repeat right center;
-  box-shadow: 2px 2px black;
+  background: $salt100  url('assets/img/dropdown.png') no-repeat right center;
+  box-shadow: 2px 2px $pepper600;
 
   &:hover {
-    background: darken(#fff, 5%) url('assets/img/dropdown.png') no-repeat right center;
+    background: darken($salt100, 5%) url('assets/img/dropdown.png') no-repeat right center;
   }
 
   &:active {
-    background: darken(#fff, 10%) url('assets/img/dropdown.png') no-repeat right center;
+    background: darken($salt100, 10%) url('assets/img/dropdown.png') no-repeat right center;
   }
 }
 

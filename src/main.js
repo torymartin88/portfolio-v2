@@ -14,7 +14,7 @@ import router from './router'
 import store from './store'
 
 // import external css
-import './assets/styles/VueDraggableResizable.css'
+// import './assets/styles/VueDraggableResizable.css'
 import './assets/styles/webfonts.css'
 
 Vue.config.productionTip = false

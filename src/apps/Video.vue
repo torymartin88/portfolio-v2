@@ -76,7 +76,6 @@ export default {
       clearInterval(this.progressInterval);
     },
     onScrub(val) {
-      console.log(val)
       this.progressPct = val
     }
   },
@@ -139,16 +138,16 @@ function zeroFill(number, width) {
 
   .controls-left {
     .button {
-      border: 1px solid #656565;
+      border-mixin($pepper400)
       width: 24px;
       height: 24px;
-      box-shadow: inset 1px 1px 1px 0 #ffffff9e, inset -1px -1px 1px 0 #00000078;
+      box-shadow: inset 1px 1px 1px 0 $white90, inset -1px -1px 1px 0 $white75;
       display: flex;
       align-items: center;
       justify-content: center;
 
       svg {
-        fill: $gray-6
+        fill: $pepper500
       }
     }
   }

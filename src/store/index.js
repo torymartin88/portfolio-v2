@@ -2,10 +2,14 @@ import Vue from "vue";
 import Vuex from "vuex";
 import VuexPersistence from "vuex-persist";
 
-import { mutations } from "./mutations";
+import mutations from "./mutations";
 import actions from "./actions";
+import getters from "./actions";
 
 import time from "./modules/time";
+import apps from "./modules/apps";
+import windows from "./modules/windows";
+import desktop from "./modules/desktop";
 
 Vue.use(Vuex);
 
@@ -13,38 +17,13 @@ const debug = process.env.NODE_ENV !== "production";
 
 export default new Vuex.Store({
   state: {
-    apps: [],
-    windows: [],
-    windowCount: 0,
-    desktopPattern: [
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0]
-    ],
-    desktopColors: {
-      primary: '#fafbfb',
-      secondary: '#20242b',
-    },
-    activeWindow: null,
     quoteOfDay: null
   },
-  getters: {
-    getActiveWindow: state => {
-      return state.windows.filter(w => w.id === state.activeWindow)[0];
-    },
-    getWindowById: state => id => {
-      return state.windows.filter(w => w.id === id);
-    }
-  },
+  getters,
   actions,
   mutations,
   modules: {
-    time
+    time, apps, windows, desktop
   },
   plugins: [new VuexPersistence().plugin],
   strict: debug

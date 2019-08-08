@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="window"
-    v-bind:class="{ active: active, 'scroll-whole-window': scroll }"
-    @click="windowActive"
-  >
+  <div class="window" :class="windowClass" @click="windowActive">
     <div class="window-header">
       <div class="close no-drag" @click="closeWindow"></div>
       <div class="spacer">
@@ -53,6 +49,18 @@ export default {
       activeComponent: this.component
     };
   },
+  computed: {
+    themeClass() {
+      return `theme-${this.$store.getters.getThemeName}`;
+    },
+    windowClass() {
+      return [
+        this.active ? "active" : "",
+        this.scroll ? "scroll-whole-window" : "",
+        this.themeClass
+      ].join(" ");
+    },
+  },
   methods: {
     closeWindow() {
       this.$emit("closeWindow");
@@ -70,16 +78,20 @@ export default {
 
 <style lang="stylus" scoped>
 .window {
-  background: #DEDEDE;
-  border: 1px solid #303030;
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.22), inset 1px 1px 0 rgba(255, 255, 255, 0.25), inset -1px -1px 0 rgba(0, 0, 0, 0.25);
+  background: $salt400;
+  border-mixin($pepper500);
+  box-shadow: 0 0 0 0 $black25, inset 1px 1px 0 $white25, inset -1px -1px 0 $black25;
   height: 100%;
-  opacity: 0.9;
+  opacity: 0;
   transition: box-shadow 100ms ease-in-out, opacity 20ms ease-in-out;
+
+  .show & {
+    opacity: 0.9;
+  }
 
   &.active {
     opacity: 1;
-    box-shadow: 4px 2px 0 0 rgba(0, 0, 0, 0.22), inset 1px 1px 0 rgba(255, 255, 255, 0.25), inset -1px -1px 0 rgba(0, 0, 0, 0.25)
+    box-shadow: 4px 2px 0 0 $black25, inset 1px 1px 0 $white25, inset -1px -1px 0 $black25;
   }
 }
 
@@ -95,20 +107,20 @@ export default {
   padding: 4px;
 
   .close {
-    background: #d6d6d6;
-    border: 1px solid #525252;
-    box-shadow: 1px 1px #fff, -1px -1px #9e9e9e, inset 1px 1px rgba(255,255,255,0.5), inset -1px -1px rgba(0,0,0,0.5);
+    background: $salt500;
+    border-mixin($pepper400);
+    box-shadow: 1px 1px $salt100, -1px -1px $pepper100, inset 1px 1px $white50, inset -1px -1px $black50;
     width: 14px;
     height: 14px;
     cursor: pointer;
     transition: opacity 20ms ease-in-out;
 
     &:hover {
-      background: darken(#d6d6d6, 5%);
+      background: $salt600;
     }
 
     &:active {
-      background: darken(#d6d6d6, 15%);
+      background: $pepper100;
     }
   }
 
@@ -120,10 +132,10 @@ export default {
     i {
       width: 100%;
       height: 1px;
-      background: #ececec;
+      background: $salt300;
       display: block;
       margin-bottom: 1px;
-      box-shadow: 1px 1px rgba(0, 0, 0, 0.1);
+      box-shadow: 1px 1px $black10;
     }
   }
 
@@ -141,16 +153,40 @@ export default {
 }
 
 .window-content {
-  background: #ececec;
+  background: $salt300;
   margin-left: 3px;
   margin-right: 3px;
-  border: 1px solid #525252;
-  box-shadow: -0.5px -0.5px 1px #b9b9b9, 0.5px 0.5px 1px rgba(255, 255, 255, 1);
+  border-mixin($pepper400);
+  box-shadow: -0.5px -0.5px 1px $salt600, 0.5px 0.5px 1px $salt100;
   height: calc(100% - 27px);
   user-select: none;
 
   .scroll-whole-window & {
     overflow-y: auto;
+  }
+}
+
+// themes
+.window.theme-black {
+  background: $pepper550;
+
+  .window-header {
+    color: $salt100
+
+    .close {
+      background: $pepper500;
+      border: 1px solid $pepper300;
+      box-shadow: -1px -1px $pepper400, inset -1px -1px $black50
+
+      &:hover {
+        background: $pepper600
+      }
+    }
+
+    .spacer i {
+      background: $pepper400
+      box-shadow: none;  
+    }
   }
 }
 </style>

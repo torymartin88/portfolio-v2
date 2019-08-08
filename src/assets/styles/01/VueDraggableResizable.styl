@@ -1,6 +1,6 @@
 .vdr {
   touch-action: none;
-  border: 1px dashed #000;
+  border-mixin($style: dashed)
 }
 .handle,
 .vdr {
@@ -10,8 +10,8 @@
 .handle {
   width: 16px;
   height: 16px;
-  background: #eee;
-  border: 1px solid #333;
+  background: $salt300;
+  border-mixin($pepper450)
   opacity: 0;
 }
 .handle-tl {

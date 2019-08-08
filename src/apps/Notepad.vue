@@ -58,7 +58,7 @@ textarea {
   padding: 5px;
   line-height: 1.25;
   resize: none;
-  border: none;
+  border-none()
   background: none;
 
   &:focus {
@@ -77,7 +77,7 @@ textarea {
   overflow-y: auto;
   font-size: 12px;
   font-weight: 100;
-  border-left: 1px solid #000000;
+  border-left: 1px solid $pepper600;
   padding: 0 20px;
   word-break: break-word;
 
@@ -89,7 +89,7 @@ textarea {
       left: -15px;
       font-size: 10px;
       font-alternate()
-      color: #9e9e9e;
+      color: $pepper100;
     }
   }
 

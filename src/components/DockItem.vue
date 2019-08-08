@@ -1,10 +1,10 @@
 <template>
-  <div class="dock-item" @click="onClick">
+  <div class="dock-item" :class="{ open: open }" @click="onClick">
     <div class="icon">
-      <i :class="iconClass" :style="iconStyle"></i>
+      <i :class="iconClass"></i>
     </div>
     <!-- <font-awesome-icon :icon="['far', icon]" /> -->
-    <span class="indicator" :class="{ show: open }"></span>
+    <span class="indicator"></span>
     <div class="tooltip">{{appName}}</div>
   </div>
 </template>
@@ -38,9 +38,6 @@ export default {
       return `fad fa-${this.icon.name} ${
         this.icon.swapOpacity ? "fa-swap-opacity" : ""
       }`;
-    },
-    iconStyle() {
-      return `--fa-primary-color: #272838; --fa-secondary-color: #272838; `;
     }
   }
 };
@@ -59,7 +56,7 @@ export default {
 
   &:hover {
     .icon {
-      background: darken(#d2d2d8, 5%);
+      background: $salt600;
       transition: all 100ms ease-in-out;
       transform: translateY(-2px);
     }
@@ -71,15 +68,20 @@ export default {
   }
 
   .icon {
-    background: #d4d4d4;
+    background: $salt500;
     border-radius: 3px;
     padding: 4px;
     display: flex;
     align-items: center;
     transition: all 250ms ease-in-out;
     height: 30px;
-    border: 1px solid #313131;
-    box-shadow: inset 1px 1px 0 rgb(214, 213, 213), inset 2px 2px 0px rgb(255, 255, 255), inset -1px -1px 0 rgba(0,0,0,0.25);
+    border-mixin($pepper400);
+    box-shadow-inset();
+  }
+
+  i {
+    --fa-primary-color: $pepper500;
+    --fa-secondary-color: $pepper500;
   }
 
   svg {
@@ -90,22 +92,18 @@ export default {
   .indicator {
     width: 4px;
     height: 4px;
-    background: #000;
+    background: $pepper200;
     margin-top: 3px;
     transition: opacity 250ms ease-in-out;
     opacity: 0;
     border-radius: 2px;
-
-    &.show {
-      opacity: 1;
-    }
   }
 
   .tooltip {
     position: absolute;
     top: -28px;
-    background: #0000008c;
-    color: white;
+    background: $black75;
+    color: $salt100;
     padding: 3px 7px;
     border-radius: 4px;
     display: block;
@@ -117,6 +115,52 @@ export default {
     opacity: 0;
     white-space: nowrap;
     transition: opacity 30ms ease-out, transform 200ms ease-out;
+  }
+
+  &.open {
+    .icon {
+      animation: bounce 1s cubic-bezier(0.5, 0.2, 0.3, 1.0);
+      animation-iteration-count: 1;
+
+    }  
+
+    .indicator {
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes bounce {
+  0%, 40%, 80% {
+    transform: translateY(-3px);
+  }
+
+  20%, 60%, 100% {
+    transform: translateY(0);
+  }
+}
+
+// themes
+.theme-black {
+  .dock-item {
+    .icon {
+      background: $pepper550;
+      box-shadow-inset($pepper500, $pepper400, $black25)
+      border-mixin($pepper600);
+    }
+
+    i {
+      --fa-primary-color: $salt500;
+      --fa-secondary-color: $salt500;
+    }
+
+    svg path {
+      fill: $salt300;
+    }
+
+    .indicator {
+      background: $salt600;
+    }
   }
 }
 </style>

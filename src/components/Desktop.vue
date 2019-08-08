@@ -1,151 +1,197 @@
 <template>
-  <div class="desktop" @contextmenu="openContextMenu">
+  <div class="desktop" :class="{ show: show }" @contextmenu="openContextMenu">
+    <div class="desktop-icons">
+      <vue-draggable-resizable
+        :x="20" :y="0" :z="1"
+        :resizable="false" :parent="true" :grid="iconGrid"
+        :w="80" :h="60"
+        class-name="icon"
+      >
+        <DesktopIcon
+          :icon="{ name: 'file-alt', swapOpacity: true }"
+          :iconColor="iconColor"
+          :text="'intro.txt'"
+          @click="iconClick"
+          @dblclick="iconDblClick"
+        />
+      </vue-draggable-resizable>
+      <vue-draggable-resizable
+        :x="80" :y="0" :z="1"
+        :resizable="false" :parent="true" :grid="iconGrid"
+        :w="80" :h="60"
+        class-name="icon"
+      >
+        <DesktopIcon
+          :icon="{ name: 'video', swapOpacity: false }"
+          :iconColor="iconColor"
+          :text="'Video v1.avi'"
+          @click="iconClick"
+          @dblclick="iconDblClick"
+        />
+      </vue-draggable-resizable>
+
+      <vue-draggable-resizable
+        :x="80"
+        :y="80"
+        :resizable="false"
+        :grid="iconGrid"
+        :w="80"
+        :h="60"
+        :z="1"
+        :parent="true"
+        class-name="icon"
+      >
+        <DesktopIcon
+          :icon="{ name: 'palette', swapOpacity: false }"
+          :iconColor="iconColor"
+          :text="'Portfolio.html'"
+          @click="iconClick"
+          @dblclick="iconDblClick"
+        />
+      </vue-draggable-resizable>
+    </div>
     <canvas id="desktop-background" />
   </div>
 </template>
 
 <script>
-import { debounce } from 'debounce';
+import DesktopIcon from "@/components/DesktopIcon.vue";
+import { debounce } from "debounce";
+import { generateBackground } from "@/utils";
 
 export default {
   name: "Desktop",
+  data() {
+    return {
+      selectedIcon: null,
+      iconGrid: [10, 10],
+      backgroundCanvas: null,
+      windowWidth: 0,
+      windowHeight: 0
+    };
+  },
+  props: {
+    show: Boolean
+  },
   methods: {
     openApp(appName) {
       this.$store.dispatch("openWindow", appName);
     },
     openContextMenu(e) {
       console.log("right click", e);
+    },
+    iconClick() {
+      console.log("icon click");
+    },
+    iconDblClick() {
+      console.log("icon double click");
     }
   },
   computed: {
     windows() {
-      return this.$store.state.windows;
+      return this.$store.state.windows.windows;
     },
-    desktopPattern() {
-      return this.$store.state.desktopPattern;
+    backgroundPattern() {
+      return this.$store.state.desktop.backgroundPattern;
     },
-    desktopColors() {
-      return this.$store.state.desktopColors;
+    themeColor() {
+      return this.$store.state.desktop.themeColor;
+    },
+    themeSecondaryColor() {
+      return this.$store.getters.getThemeSecondaryColor;
+    },
+    iconColor() {
+      return this.$store.getters.getIconColor;
     }
   },
   watch: {
-    desktopPattern() {
-      generateBackground(this.desktopPattern, this.desktopColors.primary, this.desktopColors.secondary);
+    backgroundPattern() {
+      generateBackground(
+        this.backgroundCanvas,
+        this.windowWidth,
+        this.windowHeight,
+        this.backgroundPattern,
+        this.themeColor,
+        this.themeSecondaryColor
+      );
     },
-    'desktopColors.primary': function (val) {
-      generateBackground(this.desktopPattern, this.desktopColors.primary, this.desktopColors.secondary);
-    },
-    'desktopColors.secondary': function (val) {
-      generateBackground(this.desktopPattern, this.desktopColors.primary, this.desktopColors.secondary);
+    themeColor: {
+      handler: function() {
+        generateBackground(
+          this.backgroundCanvas,
+          this.windowWidth,
+          this.windowHeight,
+          this.backgroundPattern,
+          this.themeColor,
+          this.themeSecondaryColor
+        );
+      },
+      deep: true
     }
   },
-  mounted() { 
+  mounted() {
     let self = this;
 
+    this.backgroundCanvas = document.getElementById("desktop-background");
+    this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
+
     this.$nextTick(() => {
-      window.addEventListener('resize', debounce(() => {
-        let primaryColor = self.$store.state.desktopColors.primary;
-        let secondaryColor = self.$store.state.desktopColors.secondary;
+      window.addEventListener(
+        "resize",
+        debounce(() => {
+          self.windowWidth = window.innerWidth;
+          self.windowHeight = window.innerHeight;
 
-        generateBackground(self.$store.state.desktopPattern, primaryColor, secondaryColor);
-      }, 200));
-    })
+          generateBackground(
+            self.backgroundCanvas,
+            self.windowWidth,
+            self.windowHeight,
+            self.$store.state.desktop.backgroundPattern,
+            self.$store.state.desktop.themeColor,
+            self.$store.getters.getThemeSecondaryColor
+          );
+        }, 200)
+      );
+    });
 
-    // if (pixelData.length === null) {
-    //   for (let x = 0; x < patternWidth; x++) {
-    //     pixelData[x] = [];
-    //     for (let y = 0; y < patternHeight; y++) {
-    //       let rand = Math.round(Math.random());
-
-    //       // set to 0 or 1 (on or off)
-    //       pixelData[x][y] = rand;
-    //     }
-    //   }
-
-    //   this.$store.dispatch("setDesktopPattern", pixelData);
-    // }
-
-    generateBackground(this.desktopPattern, this.desktopColors.primary, this.desktopColors.secondary);
+    generateBackground(
+      this.backgroundCanvas,
+      this.windowWidth,
+      this.windowHeight,
+      this.backgroundPattern,
+      this.themeColor,
+      this.themeSecondaryColor
+    );
+  },
+  components: {
+    DesktopIcon
   }
 };
-
-function generateBackground(pixelData, primaryColor, secondaryColor) {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-
-  const primaryRGB = hexToRgb(primaryColor);
-  const secondaryRGB = hexToRgb(secondaryColor);
-
-  let ctx = document.getElementById("desktop-background").getContext("2d");
-  ctx.canvas.width = width;
-  ctx.canvas.height = height;
-
-  // create pattern to repeat
-  const patternWidth = 8;
-  const patternHeight = 8;
-  const patternMultiplier = 1; //
-
-  // create a 50x50 canvas to write repeating pattern to
-  let tempCanvas = document.createElement("canvas");
-  tempCanvas.width = patternWidth;
-  tempCanvas.height = patternHeight;
-  let tempCtx = tempCanvas.getContext("2d");
-  let tempImageData = tempCtx.createImageData(patternWidth, patternHeight);
-
-  for (let i = 0; i < tempImageData.data.length; i += 4) {
-    let x = (i / 4) % patternWidth;
-    let y = Math.floor(i / (patternWidth * 4));
-
-    if (pixelData[y][x] !== null) {
-      let color = !pixelData[y][x] ? primaryRGB : secondaryRGB;
-
-      tempImageData.data[i] = color.r;
-      tempImageData.data[i + 1] = color.g;
-      tempImageData.data[i + 2] = color.b;
-      tempImageData.data[i + 3] = 255;
-    }
-  }
-  tempCtx.putImageData(tempImageData, 0, 0);
-
-  ctx.mozImageSmoothingEnabled = false;
-  ctx.webkitImageSmoothingEnabled = false;
-  ctx.msImageSmoothingEnabled = false;
-  ctx.imageSmoothingEnabled = false;
-
-  // write pattern to main canvas (repeating)
-  for (let x = 0; x < width; x += patternWidth * patternMultiplier) {
-    for (let y = 0; y < height; y += patternHeight * patternMultiplier) {
-      ctx.drawImage(
-        tempCanvas,
-        x,
-        y,
-        patternWidth * patternMultiplier,
-        patternHeight * patternMultiplier
-      );
-    }
-  }
-}
-
-function hexToRgb(hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null;
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
 .desktop {
-  // background: #63639C url('../assets/img/bg_tile.png');
   background: gray;
   position: absolute;
-  top: 26px;
+  top: 0;
   left: 0;
-  height: calc(100vh - 26px);
+  height: 100vh;
   width: 100vw;
   z-index: 1;
+  opacity: 1;
+  transition: opacity 200ms ease-out;
+
+  &.show {
+    opacity: 1;
+  }
+}
+
+.desktop-icons {
+  position: absolute;
+  top: 34px;
+  width: 100%;
+  height: calc(100% - 80px);
 }
 </style>

@@ -404,11 +404,11 @@ export default {
 .vue-slide-bar {
   position: relative;
   display: block;
-  background: $gray-2;
+  background: $salt500;
   cursor: pointer;
-  border: 1px solid black;
+  border-mixin()
   border-radius: 2px;
-  box-shadow: inset 0.5px 0.5px 1px #fff;
+  box-shadow: inset 0.5px 0.5px 1px $salt100;
 }
 
 .vue-slide-bar::after {
@@ -423,8 +423,8 @@ export default {
 
 .vue-slide-bar-process {
   position: absolute;
-  background: $gray-6;
-  box-shadow: inset 0.5px 0.5px 1px #ffffff82;
+  background: $pepper500;
+  box-shadow: inset 0.5px 0.5px 1px $white80;
   border-radius: 2px;
   transition: all 0s;
   z-index: 1;
@@ -457,7 +457,7 @@ export default {
   display: block;
   width: 100%;
   height: 100%;
-  border: 1px solid $gray-1;
+  border-mixin($salt300);
   box-shadow: 0 0 0 1px rgba(0,0,0,.75), inset 0 0 0 1px rgba(0,0,0,.75);
   font-alternate()
 }
@@ -471,7 +471,7 @@ export default {
 .vue-slide-bar-separate {
   position: relative;
   width: 2px;
-  background-color: #9e9e9e;
+  background-color: $pepper100;
   height: 5px;
   cursor: pointer;
 }

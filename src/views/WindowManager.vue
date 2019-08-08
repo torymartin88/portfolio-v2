@@ -1,5 +1,5 @@
 <template>
-  <div class="window-manager">
+  <div class="window-manager" :class="{ show: show }">
     <div class="bounds">
       <vue-draggable-resizable v-for="w in windows" :key="w.id" :x="w.x" :y="w.y" :resizable="w.resizable"
         :w="w.w" :h="w.h" :max-width="w.maxw" :max-height="w.maxh" :min-width="w.minw" :min-height="w.minh"
@@ -18,6 +18,9 @@ import Window from '@/components/Window.vue'
 
 export default {
   name: 'windowmanager',
+  props: {
+    show: Boolean
+  },
   data: function() {
     return {
       activeComponent: 'Calculator'
@@ -25,8 +28,7 @@ export default {
   },
   computed: {
     windows() {
-      console.log(this.$store.state.windows)
-      return this.$store.state.windows
+      return this.$store.state.windows.windows
     }
   },
   methods: {
@@ -85,8 +87,14 @@ export default {
 <style lang="stylus" scoped>
 .window-manager {
   position: relative
+  top: 24px;
   height: calc(100vh - 24px)
   width: 100vw
+  opacity: 0;
+
+  &.show {
+    opacity: 1;
+  }
 }
 
 .bounds {

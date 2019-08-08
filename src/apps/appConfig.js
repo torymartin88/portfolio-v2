@@ -17,6 +17,7 @@ export default {
     minw: 200,
     minh: 325,
     scroll: true,
+    showInDock: false,
     prettyName: 'Sample',
     icon: {
       name: 'vials',
@@ -26,11 +27,10 @@ export default {
   },
   Settings: {
     w: 325,
-    h: 325,
+    h: 210,
     resizable: false,
-    scroll: true,
+    scroll: false,
     prettyName: 'Settings',
-    showInDock: false,
     icon: {
       name: 'cog',
       primaryColor: '#54548E',

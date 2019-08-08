@@ -127,7 +127,6 @@ export default {
       else return eval(this.calculation.slice(0, -1));
     },
     fontSize() {
-      console.log(this.tempResult.length)
       return 43 - (this.tempResult.length * 1.25);
     }
   },
@@ -152,13 +151,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-$darker = #2f2f31;
-$dark = #424345;
-$gray = #616163;
-$white = #fff;
-$light = #D4D4D2;
-$accent = #f49e3f;
-
 .calculator {
   width: 100%;
   height: 100%;
@@ -171,14 +163,13 @@ $accent = #f49e3f;
 .calculator-total {
   text-align: right;
   height: 50px;
-  // flex-grow: 1;
   word-break: break-all;
 }
 
 .calculator-input {
-  color: $darker;
+  color: $pepper500;
   width: 100%;
-  border: 1px solid black;
+  border-mixin()
   padding: 5px;
   display: block;
   font-size: 16px;
@@ -197,7 +188,6 @@ $accent = #f49e3f;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  box-shadow: 2px 2px 0 1px rgba(0, 0, 0, 1);
 }
 
 .calculator-row {
@@ -207,12 +197,12 @@ $accent = #f49e3f;
   flex-grow: 1;
 
   .calculator-col {
-    flex: 1;
-    box-shadow: 0 0 0 1px $darker;
     height: 100%;
+    padding: 1px;
+    width: 25%;
 
     &.wide {
-      flex: 2;
+      width: 50%;
     }
   }
 }
@@ -220,47 +210,51 @@ $accent = #f49e3f;
 .calculator-btn {
   width: 100%;
   height: 100%;
-  border: none;
   cursor: pointer;
   padding: 4px;
   outline: none;
   font-size: 16px;
   transition: all 20ms ease-in-out;
   justify-content: center;
-  background: $white;
+  background: $salt100;
   border-radius: 0;
+  border-mixin()
 
   &:hover {
-    background: darken($white, 5%);
+    background: darken($salt100, 5%);
   }
 
-  &:active {
-    background: darken($white, 10%);
+  &:active, &:focus {
+    background: darken($salt100, 10%);
+  }
+
+  &:focus {
+    box-shadow: none;
   }
 
   &.accent {
-    background-color: $accent;
-    color: $white;
+    background-color: $tangerine400;
+    color: $salt100;
 
     &:hover {
-      background: darken($accent, 5%);
+      background: darken($tangerine400, 5%);
     }
 
-    &:active {
-      background: darken($accent, 10%);
+    &:active, &:focus {
+      background: darken($tangerine400, 10%);
     }
   }
 
   &.gray {
-    background-color: $dark;
-    color: $white;
+    background-color: $pepper400;
+    color: $salt100;
 
     &:hover {
-      background: darken($dark, 5%);
+      background: darken($pepper400, 5%);
     }
 
-    &:active {
-      background: darken($dark, 10%);
+    &:active, &:focus  {
+      background: darken($pepper400, 10%);
     }
   }
 

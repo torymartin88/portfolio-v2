@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-bar">
+  <div class="menu-bar" :class="menuClass">
     <div class="actions">
       <ul>
         <li class="app-name" v-if="!activeWindow">Desktop</li>
@@ -26,7 +26,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: "MenuBar",
   props: {
-    msg: String
+    show: Boolean
   },
   data() {
     return {
@@ -35,9 +35,16 @@ export default {
   },
   computed: {
     apps() {
-      return this.$store.state.apps;
+      return this.$store.state.apps.apps;
+    },
+    menuClass() {
+      return [
+        this.show ? "show" : "",
+        `theme-${this.themeClass}`
+      ].join(" ");
     },
     ...mapGetters({
+      themeClass: 'getThemeName',
       time: 'time/formattedDate',
       activeWindow: 'getActiveWindow'
     })
@@ -59,12 +66,21 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
 .menu-bar {
+  position: absolute;
+  width: 100vw;
   display: flex;
   align-items: center;
-  background: #DDDDDD;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5), inset 0 2px 1px 0 #FFFFFF;
+  background: $salt400;
+  box-shadow: 0 1px 1px 0 $black50, inset 0 2px 1px 0 $salt100;
   height: 24px;
   padding: 0 5px 0 0;
+  z-index: 2;
+  transform: translateY(-28px);
+  transition: transform 200ms ease-out;
+
+  &.show {
+    transform: translateY(0)
+  }
 }
 
 .actions {
@@ -73,7 +89,6 @@ export default {
 
   li {
     font-weight: 100;
-    font-style: italic
   }
 
   .app-name {
@@ -93,8 +108,6 @@ export default {
   }
 }
 
-
-
 ul {
   list-style: none;
   margin: 0;
@@ -105,10 +118,18 @@ li {
   display: inline-block;
   font-size: 16px;
   padding: 5px;
+  font-base();
 
   &:hover {
     background: rgba(0,0,0,.1);
     cursor: pointer;
   }
+}
+
+// themes
+.menu-bar.theme-black {
+  background: $pepper500;
+  color: $salt100;
+  box-shadow: 0 1px 1px 0 $pepper600, inset 0 2px 1px 0 $pepper550;
 }
 </style>
