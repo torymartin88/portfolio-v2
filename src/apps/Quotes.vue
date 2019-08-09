@@ -23,7 +23,7 @@ export default {
   mounted() {
     const self = this;
 
-    var query = quotes.get().then(querySnapshot => {
+    quotes.get().then(querySnapshot => {
       querySnapshot.forEach(function(doc) {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
