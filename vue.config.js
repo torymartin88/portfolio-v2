@@ -7,5 +7,8 @@ module.exports = {
                 import: [path.resolve(__dirname, './src/assets/styles/**/*.styl')]
             }
         } 
+    },
+    configureWebpack: {
+      devtool: 'source-map'
     }
 }

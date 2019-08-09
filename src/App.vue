@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <LoadingScreen v-if="loading" @loaded="loadingDone" />
+    <LoadingScreen :show="loading" :progress="loadingProgress" @loaded="loadingDone" />
     <MenuBar :show="!loading" />
     <Dock :show="!loading" />
     <Desktop :show="!loading" />
@@ -17,11 +17,14 @@ import Desktop from "@/components/Desktop.vue";
 import Dock from "@/components/Dock.vue";
 import WindowManager from "@/views/WindowManager.vue";
 
+import loadState from "@/store/utils/loadState"
+
 export default {
   name: "app",
   data() {
     return {
-      loading: false
+      loading: true,
+      loadingProgress: 0
     }
   },
   components: {
@@ -37,6 +40,20 @@ export default {
 
     // register apps
     this.$store.dispatch("registerApps");
+
+    const self = this;
+    // load from cache
+    if (!this.$store.initialized) {
+      loadState()
+      let loading = setInterval(() => {
+        let rand = Math.floor(Math.random() * 6) + 1
+        self.loadingProgress += (rand >= 100) ? 100 : rand 
+        if (self.loadingProgress >= 100) {
+          clearInterval(loading)
+          self.loading = false;
+        }
+      }, 50)
+    }
   },
   methods: {
     loadingDone() {

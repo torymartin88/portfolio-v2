@@ -1,6 +1,6 @@
 <template>
   <div class="notepad" v-bind:class="{ 'show-preview': showPreview }">
-    <textarea v-focus id="notepad-content" :value="content" @input="updatePreview"></textarea>
+    <textarea v-focus id="notepad-content" :value="localNote" @input="updatePreview"></textarea>
     <div class="preview" v-html="compiledMarkdown"></div>
   </div>
 </template>
@@ -10,41 +10,48 @@ import marked from "marked";
 import purify from "dompurify";
 
 export default {
-  name: "Calculator",
+  name: "Notepad",
   data() {
     return {
-      content: "",
-      showPreview: true
+      showPreview: true,
+      timeout: null,
+      localNote: this.$store.getters['notepad/getActiveNote'].content
     };
   },
   computed: {
     compiledMarkdown: function() {
-      return purify.sanitize(marked(this.content));
-    }
-  },
-  watch: {
-    content: {
-      handler() {
-        localStorage.setItem('classic::notes', JSON.stringify(this.content))
+      return purify.sanitize(marked(this.localNote));
+    },
+    activeNoteId() {
+      return this.$store.state.notepad.activeNoteId
+    },
+    activeNote: {
+      get() {
+        return this.$store.getters['notepad/getActiveNote']
+      },
+      set: function(value) {
+        const self = this;
+        // debounce to avoid mutations every keystroke
+        self.$store.dispatch('notepad/updateNoteContent', {
+          id: self.activeNoteId,
+          content: value
+        })
       }
-    }
+    },
+    notes() {
+      return this.$store.state.notepad.notes;
+    },
   },
   methods: {
     updatePreview(e) {
-      this.content = e.target.value;
-    }
-  },
-  mounted() {
-    const data = localStorage.getItem('classic::notes')
-    if (data) {
-      this.content = JSON.parse(data)
+      this.localNote = e.target.value;
+      this.activeNote = e.target.value;
     }
   }
 };
 </script>
 
 <style lang="stylus">
-
 .notepad {
   height: 100%;
   font-size: 0;

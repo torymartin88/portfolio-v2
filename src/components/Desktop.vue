@@ -180,18 +180,24 @@ export default {
   height: 100vh;
   width: 100vw;
   z-index: 1;
-  opacity: 1;
+  opacity: 0;
   transition: opacity 200ms ease-out;
+
+  .desktop-icons {
+    position: absolute;
+    top: 34px;
+    width: 100%;
+    height: calc(100% - 80px);
+    opacity: 0;
+    transition: opacity 800ms ease-out;
+  }
 
   &.show {
     opacity: 1;
-  }
-}
 
-.desktop-icons {
-  position: absolute;
-  top: 34px;
-  width: 100%;
-  height: calc(100% - 80px);
+    .desktop-icons {
+      opacity: 1;
+    }
+  }
 }
 </style>
