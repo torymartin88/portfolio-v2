@@ -75,6 +75,7 @@ export default {
     align-items: center;
     transition: all 250ms ease-in-out;
     height: 30px;
+    width: 40px;
     border-mixin($pepper400);
     box-shadow-inset();
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="desktop-icon" :class="{ selected: selected }" @click="onClick">
+  <div class="desktop-icon" :class="{ selected: selected }" @click="onClick" @dblclick="onDblClick">
     <i :class="iconClass" :style="iconStyle"></i>
     <span>{{text}}</span>
   </div>
@@ -11,9 +11,6 @@ export default {
   data() {
     return {
       selected: false,
-      delay: 200,
-      clicks: 0,
-      timer: null
     }
   },
   props: {
@@ -34,21 +31,12 @@ export default {
   },
   methods: {
     onClick() {
-      this.clicks++ 
-      if(this.clicks === 1) {
-        var self = this
-        this.timer = setTimeout(function() {
-          self.$emit('click')
-          self.selected = !self.selected;
-          self.clicks = 0
-        }, this.delay);
-      } else{
-          clearTimeout(this.timer);  
-          this.$emit("dblclick");
-          this.clicks = 0;
-
-          this.selected = false;
-      }  
+      this.selected = !this.selected
+      this.$emit('click')
+    },
+    onDblClick() {
+      this.selected = true
+      this.$emit('dblclick');
     }
   },
   computed: {
@@ -84,7 +72,7 @@ export default {
   span {
     background: $white75;
     font-alternate();
-    font-size: 12px;
+    font-size: 11px;
     padding: 0px 2px;
     user-select(none)
     border-mixin(transparent)
