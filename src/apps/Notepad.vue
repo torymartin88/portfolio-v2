@@ -1,6 +1,6 @@
 <template>
   <div class="notepad" v-bind:class="{ 'show-preview': showPreview }">
-    <textarea v-focus id="notepad-content" :value="localNote" @input="updatePreview"></textarea>
+    <textarea v-focus id="notepad-content" :value="activeNote.content" @input="updatePreview"></textarea>
     <div class="preview" v-html="compiledMarkdown"></div>
   </div>
 </template>
@@ -15,19 +15,25 @@ export default {
     return {
       showPreview: true,
       timeout: null,
-      localNote: this.$store.getters['notepad/getActiveNote'].content
     };
   },
   computed: {
     compiledMarkdown: function() {
-      return purify.sanitize(marked(this.localNote));
+      return purify.sanitize(marked(this.activeNote.content));
     },
     activeNoteId() {
       return this.$store.state.notepad.activeNoteId
     },
     activeNote: {
       get() {
-        return this.$store.getters['notepad/getActiveNote']
+        let value = this.$store.getters['notepad/getActiveNote'];
+
+        if (value) {
+          return value
+        } else {
+          this.$store.dispatch('notepad/createNote');
+          return { content: '' };
+        }
       },
       set: function(value) {
         const self = this;

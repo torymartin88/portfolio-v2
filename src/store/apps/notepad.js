@@ -2,9 +2,7 @@
 // state for notepad app
 const state = {
   activeNoteId: 0,
-  notes: [{
-    content: 'test'
-  }],
+  notes: [],
 }
 
 const getters = {
@@ -16,6 +14,9 @@ const getters = {
 const actions = {
   updateNoteContent({ commit }, { id, content } ) {
     commit('UPDATE_NOTE_CONTENT', { id, content })
+  },
+  createNote({ commit }) {
+    commit('CREATE_NOTE')
   }
 }
 
