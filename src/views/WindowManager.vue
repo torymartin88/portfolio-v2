@@ -86,10 +86,6 @@ export default {
 
 <style lang="stylus" scoped>
 .window-manager {
-  position: relative
-  top: 24px;
-  height: calc(100vh - 24px)
-  width: 100vw
   opacity: 0;
 
   &.show {
@@ -98,8 +94,9 @@ export default {
 }
 
 .bounds {
-  height: 100%
-  width: 100%
-  position: relative
+  position: absolute;
+  top: $menu-bar-height;
+  height: "calc(100vh - %s);" % $menu-bar-height
+  width: 100vw;
 }
 </style>

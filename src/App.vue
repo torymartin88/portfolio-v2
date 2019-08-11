@@ -70,6 +70,7 @@ export default {
 
 html {
   box-sizing: inherit;
+  height: 100%;
 }
 
 body {
@@ -80,6 +81,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   image-rendering: pixelated;
   font-base();
+  height: 100%;
   font-weight: 400;
   font-size: 16px;
   padding: 0;

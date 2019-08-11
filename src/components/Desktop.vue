@@ -173,7 +173,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="stylus">
 .desktop {
-  background: gray;
+  background: $pepper500;
   position: absolute;
   top: 0;
   left: 0;
@@ -199,5 +199,9 @@ export default {
       opacity: 1;
     }
   }
+}
+
+#desktop-background {
+  border-radius: $app-border-radius;
 }
 </style>
