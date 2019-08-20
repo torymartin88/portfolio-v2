@@ -3,14 +3,20 @@
     <div class="actions">
       <div class="action">
         <svg
-          width="84px"
-          height="84px"
-          viewBox="0 0 84 84"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
+          width="15px"
+          height="15px"
+          viewBox="0 0 15 15"
         >
-          <circle id="Oval-Copy-2" cx="42" cy="42" r="42" />
+          <!-- <circle id="Oval-Copy-2" cx="42" cy="42" r="42" /> -->
+          <rect id="Rectangle" fill="#000000" x="0" y="0" width="15" height="15" rx="7.5"></rect>
+          <rect id="Rectangle" fill="#FFFFFF" x="4" y="2" width="7" height="1"></rect>
+          <rect id="Rectangle-Copy" fill="#FFFFFF" x="7" y="3" width="1" height="7"></rect>
+          <rect id="Rectangle-Copy-2" fill="#FFFFFF" x="4" y="6" width="1" height="7"></rect>
+          <rect id="Rectangle-Copy-3" fill="#FFFFFF" x="10" y="6" width="1" height="7"></rect>
+          <rect id="Rectangle-Copy-4" fill="#FFFFFF" x="9" y="7" width="1" height="1"></rect>
+          <rect id="Rectangle-Copy-5" fill="#FFFFFF" x="8" y="8" width="1" height="1"></rect>
+          <rect id="Rectangle-Copy-6" fill="#FFFFFF" x="6" y="8" width="1" height="1"></rect>
+          <rect id="Rectangle-Copy-7" fill="#FFFFFF" x="5" y="7" width="1" height="1"></rect>
         </svg>
       </div>
       <div class="action">File</div>

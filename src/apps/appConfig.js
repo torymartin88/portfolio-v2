@@ -25,6 +25,19 @@ export default {
       secondaryColor: '#54548E'
     }
   },
+  Nasa: {
+    w: 400,
+    h: 400,
+    minw: 200,
+    minh: 325,
+    scroll: true,
+    prettyName: 'Nasa',
+    icon: {
+      name: 'space-shuttle',
+      primaryColor: '#54548E',
+      secondaryColor: '#54548E'
+    }
+  },
   Settings: {
     w: 325,
     h: 210,

@@ -4,17 +4,11 @@ import VueResource from 'vue-resource'
 import VueYoutube from 'vue-youtube'
 import { firestorePlugin } from 'vuefire'
 
-// import { library } from '@fortawesome/fontawesome-svg-core'
-// import { faSunCloud, faStickyNote, faVideo, faCalculator, faQuoteLeft } from '@fortawesome/pro-regular-svg-icons'
-
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
 // import external css
-// import './assets/styles/VueDraggableResizable.css'
 import './assets/styles/webfonts.css'
 
 Vue.config.productionTip = false
@@ -24,10 +18,6 @@ Vue.use(VueYoutube)
 Vue.use(firestorePlugin)
 
 Vue.component('vue-draggable-resizable', VueDraggableResizable)
-// Vue.component('font-awesome-icon', FontAwesomeIcon)
-
-// register font awesome icons
-// library.add(faSunCloud, faStickyNote, faVideo, faCalculator, faQuoteLeft)
 
 import appConfig from '@/apps/appConfig'
 

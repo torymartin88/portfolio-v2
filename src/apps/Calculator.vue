@@ -6,73 +6,11 @@
       v-cloak
     >{{ tempResult | number | hugeNumber }}</div>
 
-    <div class="calculator-input" v-cloak>{{ calculation | number | calculation}}</div>
+    <div class="calculator-input" v-cloak>{{ calculation | number | calculation | blank}}</div>
     <div class="btn-container">
-      <div class="calculator-row">
-        <div class="calculator-col">
-          <button class="calculator-btn gray action" @click="clear()">C</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn gray action" @click="backspace()">del</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn gray action" @click="append('%')">%</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn accent action" @click="append('/')">/</button>
-        </div>
-      </div>
-      <div class="calculator-row">
-        <div class="calculator-col">
-          <button class="calculator-btn" @click="append(7)">7</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn" @click="append(8)">8</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn" @click="append(9)">9</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn accent action" @click="append('*')">*</button>
-        </div>
-      </div>
-      <div class="calculator-row">
-        <div class="calculator-col">
-          <button class="calculator-btn" @click="append(4)">4</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn" @click="append(5)">5</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn" @click="append(6)">6</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn accent action" @click="append('-')">-</button>
-        </div>
-      </div>
-      <div class="calculator-row">
-        <div class="calculator-col">
-          <button class="calculator-btn" @click="append(1)">1</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn" @click="append(2)">2</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn" @click="append(3)">3</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn accent action" @click="append('+')">+</button>
-        </div>
-      </div>
-      <div class="calculator-row">
-        <div class="calculator-col wide">
-          <button class="calculator-btn" @click="append(0)">0</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn action" @click="append('.')">.</button>
-        </div>
-        <div class="calculator-col">
-          <button class="calculator-btn accent action" @click="getResult()">=</button>
+      <div class="calculator-row" v-for="(row, i) in keypad" :key="i">
+        <div class="calculator-col" :class="{ 'wide' : button.wide }" v-for="(button, j) in row" :key="j">
+          <button class="calculator-btn" :class="button.classes" @click="getAction(button.action, button.label)">{{button.label}}</button>
         </div>
       </div>
     </div>
@@ -85,12 +23,21 @@ String.prototype.replaceAll = function(search, replacement) {
   return target.split(search).join(replacement);
 };
 
+String.prototype.replace
+
 export default {
   name: "Calculator",
   data() {
     return {
       calculation: "",
-      tempResult: "0"
+      tempResult: "0",
+      keypad: [
+        [{ label: 'C', action: 'clear', classes: 'gray action' }, { label: 'del', action: 'backspace', classes: 'gray action' }, { label: '%', classes: 'gray action' }, { label: '/', classes: 'accent action' }],
+        [{ label: '7' }, { label: '8' }, { label: '9' }, { label: '*', classes: 'accent action' }],
+        [{ label: '4' }, { label: '5' }, { label: '6' }, { label: '-', classes: 'accent action' }],
+        [{ label: '1' }, { label: '2' }, { label: '3' }, { label: '+', classes: 'accent action' }],
+        [{ label: '0', wide: true }, { label: '.' }, { label: '=', action: 'getResult', classes: 'accent action' }],
+      ]
     };
   },
   methods: {
@@ -108,6 +55,16 @@ export default {
     },
     backspace() {
       this.calculation = this.calculation.slice(0, -1);
+    },
+    getAction(action, label) {
+      if (action) {
+        // call function named 'action'
+        this[action]()
+      } else {
+        // append button to stack
+        this.append(label)
+      }
+
     }
   },
   watch: {
@@ -136,16 +93,16 @@ export default {
       parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, "");
       return parts.join(".");
     },
-    number: value => {
-      return value.replaceAll("*", "x");
-    },
-    calculation: value => {
-      return value
-        .replaceAll("x", " x ")
-        .replaceAll("/", " / ")
-        .replaceAll("+", " + ")
-        .replaceAll("-", " - ");
-    }
+
+    number: value => value.replaceAll("*", "x"),
+
+    calculation: value => value
+      .replaceAll("x", " x ")
+      .replaceAll("/", " / ")
+      .replaceAll("+", " + ")
+      .replaceAll("-", " - "),
+
+    blank: value => (value === '') ? 'Enter Calculation' : value
   }
 };
 </script>

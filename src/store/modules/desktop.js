@@ -14,12 +14,12 @@ const state = {
     [0, 0, 0, 0, 0, 0, 1, 0],
     [0, 0, 0, 0, 0, 0, 0, 1]
   ],
-  themeColor: "#E6E8E8",
+  themeColor: "#E5E9EC",
   colorOptions: [
     {
       name: "white",
-      hex: "#E6E8E8",
-      secondary: "#D2D0D0",
+      hex: "#E5E9EC",
+      secondary: "#C0C8CF",
       foreground: foregroundDark
     },
     {
