@@ -15,14 +15,12 @@ export default {
     return {
       showPreview: true,
       timeout: null,
+      activeNoteId: 0
     };
   },
   computed: {
     compiledMarkdown: function() {
       return purify.sanitize(marked(this.activeNote.content));
-    },
-    activeNoteId() {
-      return this.$store.state.notepad.activeNoteId
     },
     activeNote: {
       get() {

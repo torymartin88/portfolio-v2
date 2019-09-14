@@ -55,11 +55,11 @@ export default {
       }, 50)
     }
   },
-  mounted() {
-    window.addEventListener('keyup', function(ev) {
-        console.log(ev)
-    });
-  },
+  // mounted() {
+  //   window.addEventListener('keyup', function(ev) {
+  //       console.log(ev)
+  //   });
+  // },
   methods: {
     loadingDone() {
       this.loading = false;
