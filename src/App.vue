@@ -23,7 +23,7 @@ export default {
   name: "app",
   data() {
     return {
-      loading: true,
+      loading: false,
       loadingProgress: 0
     }
   },

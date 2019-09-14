@@ -27,7 +27,7 @@ export default {
   },
   Nasa: {
     w: 400,
-    h: 400,
+    h: 600,
     minw: 200,
     minh: 325,
     scroll: true,
@@ -40,7 +40,7 @@ export default {
   },
   Settings: {
     w: 325,
-    h: 210,
+    h: 'auto',
     resizable: false,
     scroll: false,
     prettyName: 'Settings',

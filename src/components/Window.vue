@@ -42,6 +42,9 @@ export default {
     },
     scroll: {
       type: Boolean
+    },
+    autoHeight:  {
+      type: Boolean
     }
   },
   data: function() {
@@ -57,6 +60,7 @@ export default {
       return [
         this.active ? "active" : "",
         this.scroll ? "scroll-whole-window" : "",
+        this.autoHeight ? "auto-height" : "",
         this.themeClass
       ].join(" ");
     },
@@ -84,6 +88,10 @@ export default {
   height: 100%;
   opacity: 0;
   transition: box-shadow 100ms ease-in-out, opacity 20ms ease-in-out;
+
+  &.auto-height {
+    padding-bottom: 3px;
+  }
 
   .show & {
     opacity: 0.9;

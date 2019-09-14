@@ -3,24 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --https",
+    "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
-    "now-dev": "vue-cli-service serve --https --port $PORT",
-    "now-build": "vue-cli-service build"
+    "dev": "vue-cli-service serve --port $PORT",
+    "build": "vue-cli-service build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.21",
     "@fortawesome/pro-regular-svg-icons": "^5.10.1",
     "@fortawesome/vue-fontawesome": "^0.1.6",
     "core-js": "^2.6.5",
-    "dateformat": "^3.0.3",
     "debounce": "^1.2.0",
     "dompurify": "^1.0.11",
     "firebase": "^6.3.4",
     "localforage": "^1.7.3",
     "localforage-getitems": "^1.4.2",
     "marked": "^0.7.0",
+    "moment": "^2.24.0",
     "request": "^2.88.0",
     "vue": "^2.6.10",
     "vue-color": "^2.7.0",

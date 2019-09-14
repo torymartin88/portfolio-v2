@@ -1,15 +1,4 @@
 {
   "name": "classic-mac",
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@now/static-build",
-      "config": { "distDir": "dist" }
-    },
-    {
-      "src": "api/**/*.js",
-      "use": "@now/node"
-    }
-  ]
+  "version": 2
 }

@@ -1,9 +1,9 @@
 // Store and update time related properties
 
-import dateformat from 'dateformat'
+import moment from 'moment'
 
 // default dateFormatString
-const dateFormatString = 'ddd h:MM TT'
+const dateFormatString = 'ddd h:MM A'
 
 const state = {
     now: new Date()
@@ -11,7 +11,7 @@ const state = {
 
 const getters = {
     formattedDate(state) {
-        return dateformat(state.now, dateFormatString)
+        return moment(state.now).format(dateFormatString)
     }
 }
 
@@ -25,7 +25,7 @@ const actions = {
 
 const mutations = {
     updateTime (state) {
-      state.now = new Date
+      state.now = new Date()
     }
 }
 
