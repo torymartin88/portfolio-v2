@@ -7,7 +7,7 @@
         :handles="['tr', 'tl', 'br', 'bl']" :drag-handle="'.window-header'" :drag-cancel="'.no-drag'" class-name="window"
         @activated="onActivated(w.id)" @deactivated="onDeactivated(w.id)" @resizestop="onResizeStop(w.id, ...arguments)" @dragstop="onDragStop(w.id, ...arguments)">
         <Window :component="w.component" :active="w.active" :auto-height="w.h === 'auto' ? true : false"
-          :scroll="w.scroll"
+          :scroll="w.scroll" :title="w.title !== null ? w.title : w.component" :id="w.id"
           @closeWindow="onCloseWindow(w.id)" @activated="onActivated(w.id)" 
         />
       </vue-draggable-resizable>

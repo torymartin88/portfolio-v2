@@ -25,6 +25,30 @@ export default {
       secondaryColor: '#54548E'
     }
   },
+  Finder: {
+    w: 400,
+    h: 300,
+    scroll: true,
+    showInDock: true,
+    prettyName: 'Finder',
+    icon: {
+      name: 'folder-open',
+      primaryColor: '#54548E',
+      secondaryColor: '#54548E'
+    }
+  },
+  Browser: {
+    w: 600,
+    h: 400,
+    scroll: true,
+    showInDock: true,
+    prettyName: 'Browser',
+    icon: {
+      name: 'folder-open',
+      primaryColor: '#54548E',
+      secondaryColor: '#54548E'
+    }
+  },
   Nasa: {
     w: 400,
     h: 600,

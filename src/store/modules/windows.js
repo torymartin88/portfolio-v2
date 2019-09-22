@@ -4,7 +4,8 @@ import config from "../../apps/appConfig";
 const state = {
   windows: [],
   windowCount: 0,
-  activeWindow: null,
+  activeWindow: null, // set to id of active window in [windows]
+  activeWindowTitleText: null // if null, window will display app name
 }
 
 const getters = {
@@ -53,6 +54,7 @@ const actions = {
         active: true,
         scroll: compConfig.scroll,
         icon: compConfig.icon || "",
+        title: null,
         prettyName: compConfig.prettyName || compConfig.component,
       });
     }
@@ -66,6 +68,11 @@ const actions = {
 
     // activate window with passed in id
     commit("SET_WINDOW_ACTIVE", id);
+  },
+
+  setWindowTitle({ commit }, { id, title }) {
+    // set window title
+    commit("SET_WINDOW_TITLE", { window_id: id, title: title } );
   },
 
   setInactiveWindow({ commit }, id) {
@@ -112,6 +119,11 @@ const mutations = {
     const window = state.windows.filter(w => w.id === window_id)
     window[0].active = true
     state.activeWindow = window_id
+  },
+
+  SET_WINDOW_TITLE(state, { window_id, title }) {
+    const window = state.windows.filter(w => w.id === window_id)
+    window[0].title = title
   },
 
   SET_WINDOW_INACTIVE(state, window_id) {

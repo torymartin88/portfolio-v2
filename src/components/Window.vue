@@ -11,7 +11,7 @@
         <i></i>
         <i></i>
       </div>
-      <div>{{activeComponent}}</div>
+      <div>{{title}}</div>
       <div class="spacer">
         <i></i>
         <i></i>
@@ -24,7 +24,7 @@
       <!-- <div class="close no-drag"></div> -->
     </div>
     <div class="window-content">
-      <component :is="activeComponent"></component>
+      <component :is="activeComponent" @updatetitle="updateTitle"></component>
     </div>
   </div>
 </template>
@@ -35,6 +35,14 @@ export default {
   props: {
     component: {
       type: String,
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    id: {
+      type: Number,
       required: true
     },
     active: {
@@ -63,7 +71,7 @@ export default {
         this.autoHeight ? "auto-height" : "",
         this.themeClass
       ].join(" ");
-    },
+    }
   },
   methods: {
     closeWindow() {
@@ -74,6 +82,13 @@ export default {
       if (!this.active) {
         this.$emit("activated");
       }
+    },
+    updateTitle(title) {
+      const self = this;
+      self.$store.dispatch('setWindowTitle', {
+        id: self.id,
+        title: title
+      })
     }
   }
 };
