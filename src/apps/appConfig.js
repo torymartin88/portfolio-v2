@@ -25,6 +25,18 @@ export default {
       secondaryColor: '#54548E'
     }
   },
+  Terminal: {
+    w: 250,
+    h: 325,
+    scroll: true,
+    showInDock: true,
+    prettyName: 'Terminal',
+    icon: {
+      name: 'terminal',
+      primaryColor: '#54548E',
+      secondaryColor: '#54548E'
+    }
+  },
   Nasa: {
     w: 400,
     h: 600,
