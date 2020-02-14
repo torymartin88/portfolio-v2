@@ -1,5 +1,5 @@
 <template>
-  <div class="desktop-icon" :class="{ selected: selected }" @click="onClick" @dblclick="onDblClick">
+  <div class="desktop-icon" :class="{ selected: isSelected }" @click="onClick" @dblclick="onDblClick">
     <i :class="iconClass" :style="iconStyle"></i>
     <span>{{text}}</span>
   </div>
@@ -8,12 +8,12 @@
 <script>
 export default {
   name: "DesktopIcon",
-  data() {
-    return {
-      selected: false,
-    }
-  },
   props: {
+    id: {
+      type: Number,
+      default: null,
+      required: false
+    },
     icon: {
       type: Object,
       default: null,
@@ -27,16 +27,28 @@ export default {
     iconColor: {
       type: String,
       default: '#272838'
+    },
+    selected: {
+      type: Boolean,
+      default: false
+    },
+    action: {
+      type: Object,
+      default: function() {
+        return {
+          appName: 'Finder',
+          args: 'projects'
+        }
+      }
     }
   },
   methods: {
     onClick() {
-      this.selected = !this.selected
-      this.$emit('click')
+      this.$emit('click', { id: this.id, selected: !this.selected })
     },
     onDblClick() {
-      this.selected = true
-      this.$emit('dblclick');
+      this.$store.dispatch("openWindow", { appName: this.action.appName, args: this.action.args });
+      this.$emit('dblclick', { id: this.id, selected: true });
     }
   },
   computed: {
@@ -47,6 +59,9 @@ export default {
     },
     iconStyle() {
       return `--fa-primary-color: ${this.iconColor}; --fa-secondary-color: ${this.iconColor}; `;
+    },
+    isSelected() {
+      return this.selected
     }
   }
 };

@@ -18,16 +18,22 @@ const getters = {
 }
 
 const actions = {
-  openWindow({ commit, state }, component) {
+  openWindow({ commit, state }, { appName, args }) {
     // create hidden window and attach component
     // get config values for component
-    var compConfig = config[component];
+    var compConfig = config[appName];
 
     var appAlreadyOpen = false;
 
+    if (!appName) {
+      console.error('Must provide appName to `openWindow`')
+      return
+    }
+
     // set all other windows to inactive
     for (let window of state.windows) {
-      if (window.component === component) {
+      console.log(window.appName, appName)
+      if (window.appName === appName) {
         appAlreadyOpen = window.id;
       }
       commit("SET_WINDOW_INACTIVE", window.id);
@@ -39,9 +45,15 @@ const actions = {
 
       // otherwise open the app
     } else {
-      commit("OPEN_APP", component);
+      let windowTitle = null
+      
+      if (args.path) {
+        windowTitle = args.path.charAt(0).toUpperCase() + args.path.slice(1) || null
+      }
+
+      commit("OPEN_APP", appName);
       commit("OPEN_WINDOW", {
-        component: component,
+        component: appName,
         x: 200,
         y: 200,
         w: compConfig.w,
@@ -54,8 +66,8 @@ const actions = {
         active: true,
         scroll: compConfig.scroll,
         icon: compConfig.icon || "",
-        title: null,
-        prettyName: compConfig.prettyName || compConfig.component,
+        title: windowTitle,
+        prettyName: compConfig.prettyName || compConfig.appName,
       });
     }
   },

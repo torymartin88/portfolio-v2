@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     openApp(appName) {
-      this.$store.dispatch("openWindow", appName);
+      this.$store.dispatch("openWindow", { appName: appName, args: '' });
     }
   },
   computed: {

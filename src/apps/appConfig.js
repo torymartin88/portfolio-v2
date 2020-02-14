@@ -41,7 +41,7 @@ export default {
     w: 600,
     h: 400,
     scroll: true,
-    showInDock: true,
+    showInDock: false,
     prettyName: 'Browser',
     icon: {
       name: 'folder-open',

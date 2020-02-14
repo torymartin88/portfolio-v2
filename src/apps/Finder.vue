@@ -2,28 +2,24 @@
   <div class="finder" @click="updateTitle">
     <DesktopIcon
       :icon="{ name: 'cloud-upload', swapOpacity: false }"
-      :iconColor="iconColor"
       :text="'Data Importer'"
       @click="iconClick"
       @dblclick="iconDblClick"
     />
     <DesktopIcon
       :icon="{ name: 'pencil-ruler', swapOpacity: false }"
-      :iconColor="iconColor"
       :text="'Lunchbox'"
       @click="iconClick"
       @dblclick="iconDblClick"
     />
     <DesktopIcon
       :icon="{ name: 'truck', swapOpacity: false }"
-      :iconColor="iconColor"
       :text="'323 Portal'"
       @click="iconClick"
       @dblclick="iconDblClick"
     />
     <DesktopIcon
       :icon="{ name: 'chart-line', swapOpacity: false }"
-      :iconColor="iconColor"
       :text="'Insights'"
       @click="iconClick"
       @dblclick="iconDblClick"

@@ -1,50 +1,19 @@
 <template>
-  <div class="desktop" :class="{ show: show }" @contextmenu="openContextMenu">
+  <div class="desktop" :class="{ show: show }" @contextmenu="openContextMenu" @click="desktopClick($event)">
     <div class="desktop-icons">
-      <vue-draggable-resizable
-        :x="20" :y="0" :z="1"
+      <vue-draggable-resizable v-for="i in icons" :key="i.id"
+        :x="i.x" :y="i.y" :z="1"
         :resizable="false" :parent="true" :grid="iconGrid"
         :w="80" :h="60"
         class-name="icon"
       >
         <DesktopIcon
-          :icon="{ name: 'file-alt', swapOpacity: true }"
+          :id="i.id"
+          :icon="i.icon"
           :iconColor="iconColor"
-          :text="'intro.txt'"
-          @click="iconClick"
-          @dblclick="iconDblClick"
-        />
-      </vue-draggable-resizable>
-      <vue-draggable-resizable
-        :x="80" :y="0" :z="1"
-        :resizable="false" :parent="true" :grid="iconGrid"
-        :w="80" :h="60"
-        class-name="icon"
-      >
-        <DesktopIcon
-          :icon="{ name: 'video', swapOpacity: false }"
-          :iconColor="iconColor"
-          :text="'Video v1.avi'"
-          @click="iconClick"
-          @dblclick="iconDblClick"
-        />
-      </vue-draggable-resizable>
-
-      <vue-draggable-resizable
-        :x="80"
-        :y="80"
-        :resizable="false"
-        :grid="iconGrid"
-        :w="80"
-        :h="60"
-        :z="1"
-        :parent="true"
-        class-name="icon"
-      >
-        <DesktopIcon
-          :icon="{ name: 'palette', swapOpacity: false }"
-          :iconColor="iconColor"
-          :text="'Portfolio.html'"
+          :text="i.name"
+          :selected="i.selected"
+          :action="i.action"
           @click="iconClick"
           @dblclick="iconDblClick"
         />
@@ -67,7 +36,32 @@ export default {
       iconGrid: [10, 10],
       backgroundCanvas: null,
       windowWidth: 0,
-      windowHeight: 0
+      windowHeight: 0,
+      icons: [{
+        id: 1,
+        name: 'intro.txt',
+        x: 20, y: 0,
+        icon: { name: 'file-alt', swapOpacity: true },
+        selected: false
+      },{
+        id: 2,
+        name: 'Video.avi',
+        x: 80, y: 0,
+        icon: { name: 'video', swapOpacity: true },
+        selected: false
+      },{
+        id: 3,
+        name: 'Projects',
+        x: 80, y: 80,
+        icon: { name: 'folder', swapOpacity: true },
+        selected: false,
+        action: {
+          appName: 'Finder',
+          args: {
+            path: 'projects'
+          }
+        }
+      }]
     };
   },
   props: {
@@ -75,16 +69,25 @@ export default {
   },
   methods: {
     openApp(appName) {
-      this.$store.dispatch("openWindow", appName);
+      this.$store.dispatch("openWindow", { appName: appName, args: '' });
     },
     openContextMenu(e) {
       console.log("right click", e);
     },
-    iconClick() {
-      console.log("icon click");
+    desktopClick(e) {
+      // deselect all icons if desktop actually clicked
+      if (e.srcElement.classList.contains('desktop') || e.srcElement.classList.contains('desktop-icons')) {
+        deselectAllIcons(this.icons)
+      }
     },
-    iconDblClick() {
-      console.log("icon double click");
+    iconClick(clickObj) {
+      deselectAllIcons(this.icons)
+
+      // remove all other icon highlights
+      this.icons[clickObj.id-1].selected = clickObj.selected
+    },
+    iconDblClick(clickObj) {
+      deselectAllIcons(this.icons)
     }
   },
   computed: {
@@ -168,6 +171,12 @@ export default {
     DesktopIcon
   }
 };
+
+function deselectAllIcons(icons) {
+  for (let icon of icons) {
+    icon.selected = false
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
